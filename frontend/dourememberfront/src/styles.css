@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+/* #4F7380 → a muted teal blue. #F5821F → a bright orange. #9CA3AA → a medium gray. COLORS */
+
+
+.nunito-sans-1 {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
+.lexend-deca-1 {
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+
+.quicksand-1 {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 650;
+  font-style: normal;
+}

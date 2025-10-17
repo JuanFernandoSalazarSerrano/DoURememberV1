@@ -1,0 +1,21 @@
+<div class="min-h-screen bg-gray-50">
+<div class="bg-white border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl font-bold text-[#4F7380] font-['Lexend_Deca']">
+        Memory Recalls
+    </h1>
+    <p class="mt-2 text-gray-600 quicksand-1 text-2xl">
+      Browse through your collection of memories
+    </p>
+  </div>
+</div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+@for (Memory of memoryRecallsList; track $index) {
+  <test-memory-recall
+    [TestMemoryRecall]="Memory"
+  ></test-memory-recall>
+}
+</div>
+</div>

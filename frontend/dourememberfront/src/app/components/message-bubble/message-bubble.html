@@ -1,0 +1,41 @@
+@if (indexOfMessage%2 == 0){
+      <div class="flex items-start gap-3 animate-fade-in">
+      <div class="flex-shrink-0">
+        <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
+          AI
+        </div>
+      </div>
+      <div class="flex-1 max-w-2xl">
+        <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 p-4 transition-all duration-300 hover:shadow-lg">
+          <p class="text-[#4F7380] text-base leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
+            This is an AI response made by the DEEPSEEK MODEL
+          </p>
+        </div>
+        <p class="text-xs text-[#9CA3AA] mt-1 ml-3" style="font-family: 'Nunito Sans', sans-serif;">
+          1 min ago
+        </p>
+      </div>
+    </div>
+}
+
+@else {
+<div class="flex items-start gap-3 justify-end animate-fade-in">
+  <div class="flex-1 max-w-2xl flex justify-end">
+    <div class="inline-block">
+      <div class="bg-gradient-to-br from-[#4F7380] to-[#3d5a66] text-white rounded-2xl rounded-tr-none shadow-md px-5 py-3 transition-all duration-300 hover:shadow-lg">
+        <p class="text-base leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
+          {{contentOfMessage}}
+        </p>
+      </div>
+      <p class="text-xs text-[#9CA3AA] mt-1 mr-3 text-right" style="font-family: 'Nunito Sans', sans-serif;">
+        2 min ago
+      </p>
+    </div>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="w-10 h-10 rounded-full bg-[#9CA3AA] flex items-center justify-center text-white font-semibold">
+      U
+    </div>
+  </div>
+</div>
+}

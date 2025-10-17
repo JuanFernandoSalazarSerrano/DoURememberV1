@@ -1,0 +1,54 @@
+<section class="relative min-h-[500px] bg-gradient-to-b from-gray-50 to-white py-16 px-4 overflow-hidden">
+  <div class="max-w-5xl mx-auto relative mt-7">
+    <!-- Hero Heading -->
+    <div class="text-center mb-12">
+      <h1 class="quicksand-1 text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-2">
+        Book a medical appointment
+        <span class="block text-[#4F7380]">in DoURemember</span>
+      </h1>
+    </div>
+
+    <!-- Search Form Container -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 relative z-10">
+      <!-- Toggle Buttons -->
+      <!-- Removed SVG icons and updated colors to match navbar palette -->
+      <div class="flex gap-2 mb-6">
+        <button class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-[#4F7380] bg-white text-gray-800 font-medium quicksand-1 hover:bg-gray-50 transition-colors">
+          On-site
+        </button>
+        <button class="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#4F7380] bg-opacity-10 text-gray-800 font-medium quicksand-1 hover:bg-[#4F7380] hover:bg-opacity-20 transition-colors">
+          Remote
+        </button>
+      </div>
+
+      <!-- Search Form -->
+      <div class="flex flex-col md:flex-row gap-4">
+        <!-- Name/Specialty Input -->
+        <!-- Removed search icon SVG and updated focus color -->
+        <div class="flex-1 relative">
+          <input
+            type="text"
+            placeholder="Name, specialty, practice"
+            class="w-full px-4 py-4 border-2 border-[#9CA3AA] rounded-lg lexend-deca-1 text-gray-700 placeholder-[#9CA3AA] focus:outline-none focus:border-[#4F7380] transition-colors"
+          />
+        </div>
+
+        <!-- Location Input -->
+        <!-- Removed location icon SVG and updated focus color -->
+        <div class="flex-1 relative">
+          <input
+            type="text"
+            placeholder="Where? (city, zip code, address)"
+            class="w-full px-4 py-4 border-2 border-[#9CA3AA] rounded-lg lexend-deca-1 text-gray-700 placeholder-[#9CA3AA] focus:outline-none focus:border-[#4F7380] transition-colors"
+          />
+        </div>
+
+        <!-- Search Button -->
+        <!-- Updated button color to use orange accent from palette -->
+        <button class="px-8 py-4 bg-[#F5821F] hover:bg-[#e0730d] text-white font-semibold rounded-lg quicksand-1 transition-colors whitespace-nowrap shadow-sm">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
