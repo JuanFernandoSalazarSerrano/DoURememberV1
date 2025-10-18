@@ -1,4 +1,4 @@
-#!/home/serrano/Desktop/sockets_practice/venv/bin/python3
+#!/home/serrano/Desktop/douremember/backend/ai/ai_socket/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

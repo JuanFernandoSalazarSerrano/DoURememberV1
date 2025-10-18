@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/serrano/Desktop/sockets_practice/venv
+set -gx VIRTUAL_ENV /home/serrano/Desktop/douremember/backend/ai/ai_socket/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

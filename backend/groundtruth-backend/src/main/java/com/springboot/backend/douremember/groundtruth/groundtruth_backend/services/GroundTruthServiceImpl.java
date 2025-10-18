@@ -2,12 +2,13 @@ package com.springboot.backend.douremember.groundtruth.groundtruth_backend.servi
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.backend.douremember.groundtruth.groundtruth_backend.repositories.GroundTruthRepository;
 
 @Service
@@ -22,23 +23,25 @@ public class GroundTruthServiceImpl implements GroundTruthService {
 
     @Override
     @Transactional
-    public void generateGroundTruthTestResponse() {
-        String url = "http://localhost:8000/api/ai/v1";
+    public void generateGroundTruthTestSendAnswer(String userAnswer) {
 
-        // Create JSON-like body
-        Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("response", "tell me a fun fact about spiders");
 
-        // Set headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+    String url = "http://localhost:8000/api/ai/v1";
 
-        // Combine headers and body
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
 
-        // Make POST request
+    ObjectMapper mapper = new ObjectMapper();
+    try {
+        String jsonBody = mapper.writeValueAsString(Collections.singletonMap("userAnswer", userAnswer));
+        System.out.println("Outgoing JSON -> " + jsonBody);
+
+        HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-
         System.out.println("Response from Django: " + response.getBody());
+    } catch (RestClientException | com.fasterxml.jackson.core.JsonProcessingException e) {
+        e.printStackTrace();
     }
+}
+
 }

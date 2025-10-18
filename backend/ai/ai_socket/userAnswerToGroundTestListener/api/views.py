@@ -11,6 +11,6 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 def api_view_example(request):
     print(request.data)
     client.connect((HOST,PORT))
-    client.send(str(request.data.get('response')).encode("utf-8"))
+    client.send(str(request.data.get('userAnswer')).encode("utf-8"))
     print(client.recv(1024).decode("utf-8"))
     return Response({"status": "ok"})
