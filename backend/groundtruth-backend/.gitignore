@@ -31,4 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
-application.properties
+
+# Ignore all build outputs
+**/target/
+
+# Ignore all application configuration files
+**/application.properties
+**/application.yml

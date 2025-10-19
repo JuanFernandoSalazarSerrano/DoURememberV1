@@ -45,6 +45,7 @@ while True:
         ]
     )
     print(completion.choices[0].message.content)
+    aiResponse = completion.choices[0].message.content
     print()
     communication_socket.send("Got your message".encode('utf-8'))
     communication_socket.close()

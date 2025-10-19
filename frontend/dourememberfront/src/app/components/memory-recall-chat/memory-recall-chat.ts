@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
 import { MessageBubble } from '../message-bubble/message-bubble';
 import { FormsModule } from '@angular/forms';
+import { GroundTruthService } from '../../services/ground-truth-service';
 
 
 @Component({
@@ -19,15 +20,24 @@ export class MemoryRecallChat {
 
   userMessageHistory: string[] = []
 
-  constructor(private readonly router: Router){
-      if(this.router.currentNavigation()?.extras.state){
+  constructor(
+    private readonly router: Router,
+    private service: GroundTruthService){
+
+    if(this.router.currentNavigation()?.extras.state){
       this.memoryRecall = this.router.currentNavigation()?.extras.state!['memoryRecall']
+
     }
   }
 
   sendMessage(userMessage: string){
+
     this.userMessageHistory.push(userMessage)
-    this.userMessage = ''
+
+    this.service.sendUserAnswerToAiGroundTruthTest(userMessage).subscribe(llmResponse => {
+      this.userMessageHistory = [...this.userMessageHistory, llmResponse];
+      this.userMessage = ''
+    })
   }
 
 

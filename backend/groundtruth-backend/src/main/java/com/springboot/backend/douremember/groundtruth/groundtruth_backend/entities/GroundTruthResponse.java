@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "GroundTruthResponse")
+@Table(name = "ground_truth_response")
 public class GroundTruthResponse {
     
     @Id

@@ -9,6 +9,7 @@ import org.springframework.http.*;
 import java.util.Collections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.backend.douremember.groundtruth.groundtruth_backend.entities.GroundTruthResponse;
 import com.springboot.backend.douremember.groundtruth.groundtruth_backend.repositories.GroundTruthRepository;
 
 @Service
@@ -43,5 +44,10 @@ public class GroundTruthServiceImpl implements GroundTruthService {
         e.printStackTrace();
     }
 }
+
+    @Override
+    public GroundTruthResponse saveGroundTruthResponse(GroundTruthResponse groundTruthResponse) {
+        return repository.save(groundTruthResponse);
+    }
 
 }
