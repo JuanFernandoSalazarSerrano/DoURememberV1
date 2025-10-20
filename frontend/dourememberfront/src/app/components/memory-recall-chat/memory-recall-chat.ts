@@ -4,7 +4,9 @@ import { MemoryRecallModel } from '../../models/MemoryRecallModel';
 import { MessageBubble } from '../message-bubble/message-bubble';
 import { FormsModule } from '@angular/forms';
 import { GroundTruthService } from '../../services/ground-truth-service';
-
+import { SseClient } from 'ngx-sse-client';
+import { HttpHeaders } from '@angular/common/http';
+import { GroundTruthResponse } from '../../models/GroundTruthResponse';
 
 @Component({
   selector: 'app-memory-recall-chat',
@@ -22,20 +24,47 @@ export class MemoryRecallChat {
 
   constructor(
     private readonly router: Router,
-    private service: GroundTruthService){
+    private readonly service: GroundTruthService,
+    private readonly sseClient: SseClient){
 
     if(this.router.currentNavigation()?.extras.state){
-      this.memoryRecall = this.router.currentNavigation()?.extras.state!['memoryRecall']
+      this.memoryRecall = this.router.currentNavigation()?.extras.state!['memoryRecall']}
 
+      const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
+
+      this.sseClient.stream('http://localhost:8080/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
+        if (event.type === 'error') {
+          const errorEvent = event as ErrorEvent;
+          console.error(errorEvent.error, errorEvent.message);
+        } else {
+          const messageEvent = event as MessageEvent;
+          console.info(`SSE request with type "${messageEvent.type}" and data "${messageEvent.data}"`);
+          try {
+            const payload = typeof messageEvent.data === 'string'
+              ? JSON.parse(messageEvent.data)
+              : messageEvent.data;
+
+            // typed assertion
+            const response = payload as GroundTruthResponse;
+
+            // push only the aiResponse text to history
+            if (response && response.aiResponse !== undefined && response.aiResponse !== null) {
+              this.userMessageHistory = [...this.userMessageHistory, response.aiResponse];
+            } else {
+              console.warn('SSE payload missing aiResponse', payload);
+            }
+          } catch (err) {
+            console.error('Failed to parse SSE data', messageEvent.data, err);
+          }
+        }
+      });
     }
-  }
 
   sendMessage(userMessage: string){
 
     this.userMessageHistory.push(userMessage)
 
     this.service.sendUserAnswerToAiGroundTruthTest(userMessage).subscribe(llmResponse => {
-      this.userMessageHistory = [...this.userMessageHistory, llmResponse];
       this.userMessage = ''
     })
   }

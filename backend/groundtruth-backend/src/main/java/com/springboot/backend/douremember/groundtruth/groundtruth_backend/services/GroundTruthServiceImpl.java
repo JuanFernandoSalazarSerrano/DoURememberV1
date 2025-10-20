@@ -26,7 +26,6 @@ public class GroundTruthServiceImpl implements GroundTruthService {
     @Transactional
     public void generateGroundTruthTestSendAnswer(String userAnswer) {
 
-
     String url = "http://localhost:8000/api/ai/v1";
 
     HttpHeaders headers = new HttpHeaders();
@@ -40,6 +39,7 @@ public class GroundTruthServiceImpl implements GroundTruthService {
         HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
         System.out.println("Response from Django: " + response.getBody());
+
     } catch (RestClientException | com.fasterxml.jackson.core.JsonProcessingException e) {
         e.printStackTrace();
     }
@@ -47,7 +47,7 @@ public class GroundTruthServiceImpl implements GroundTruthService {
 
     @Override
     public GroundTruthResponse saveGroundTruthResponse(GroundTruthResponse groundTruthResponse) {
+        System.out.println("HOLA AMIGOS "+ groundTruthResponse);
         return repository.save(groundTruthResponse);
     }
-
 }

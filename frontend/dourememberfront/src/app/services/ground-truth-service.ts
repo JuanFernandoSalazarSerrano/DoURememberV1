@@ -12,14 +12,13 @@ export class GroundTruthService {
   constructor(private readonly http: HttpClient){}
 
   sendUserAnswerToAiGroundTruthTest(userAnswer: string): Observable<string>{
-    // const body = { id: 1, userAnswer };
-    // const headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json'
-    // });
-    // return this.http.post<string>(this.url, body, { headers });
+    const body = { id: 1, userAnswer };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    return this.http.post<string>(this.url, body, { headers });
 
-    return of("repsuesta de la ia")
   }
 
 }

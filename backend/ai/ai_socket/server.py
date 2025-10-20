@@ -2,6 +2,7 @@
 # python3 -m venv venv - create
 # source venv/bin/activate - start
 
+import requests
 from openai import OpenAI
 import os
 from dotenv import find_dotenv, load_dotenv
@@ -45,7 +46,17 @@ while True:
         ]
     )
     print(completion.choices[0].message.content)
+
     aiResponse = completion.choices[0].message.content
+    
+
+    url = 'http://localhost:8080/api/v1/groundtruth/saveAiResponse'
+    myobj = {"aiResponse":str(aiResponse)}
+
+    print("ai json -> ", myobj)
+
+    response = requests.post(url, json=myobj)
+
     print()
     communication_socket.send("Got your message".encode('utf-8'))
     communication_socket.close()
