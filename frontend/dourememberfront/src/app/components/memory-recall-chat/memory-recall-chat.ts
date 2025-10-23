@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
 import { MessageBubble } from '../message-bubble/message-bubble';
@@ -32,7 +32,7 @@ export class MemoryRecallChat {
 
       const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
 
-      this.sseClient.stream('http://localhost:8080/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
+this.sseClient.stream('http://localhost:8080/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
         if (event.type === 'error') {
           const errorEvent = event as ErrorEvent;
           console.error(errorEvent.error, errorEvent.message);
@@ -44,12 +44,14 @@ export class MemoryRecallChat {
               ? JSON.parse(messageEvent.data)
               : messageEvent.data;
 
-            // typed assertion
-            const response = payload as GroundTruthResponse;
+                const cleanedResponse = payload.aiResponse.replace(/^"|"$|\\(?!u)/g, '');
+                const parsedJson = JSON.parse(cleanedResponse);
 
+              // typed assertion
+            const response = parsedJson as GroundTruthResponse;
             // push only the aiResponse text to history
             if (response && response.aiResponse !== undefined && response.aiResponse !== null) {
-              this.userMessageHistory = [...this.userMessageHistory, response.aiResponse];
+                this.userMessageHistory = [...this.userMessageHistory, response.aiResponse];
             } else {
               console.warn('SSE payload missing aiResponse', payload);
             }
@@ -60,14 +62,36 @@ export class MemoryRecallChat {
       });
     }
 
-  sendMessage(userMessage: string){
+  sendMessage(userAnswer: string){
 
-    this.userMessageHistory.push(userMessage)
+    this.userMessageHistory.push(userAnswer)
 
-    this.service.sendUserAnswerToAiGroundTruthTest(userMessage).subscribe(llmResponse => {
       this.userMessage = ''
-    })
+
+    this.service.sendUserAnswerToAiGroundTruthTest(
+
+      `{
+      "groundTruth": ${JSON.stringify(this.memoryRecall.groundTruthDescriptionComplete)},
+      "groundTruthFacts": ${JSON.stringify(this.memoryRecall.groundTruthFacts)},
+      "keyEntities": ${JSON.stringify(this.memoryRecall.keyEntities)},
+      "userAnswer": ${JSON.stringify(userAnswer.replaceAll('\n', ''))},
+      "matchingTolerances": {
+        "synonymAllowance": true,
+        "fuzzyStringThreshold": 0.75,
+        "numericTolerancePercent": 10
+      },
+      "scoringWeights": {
+        "presence": 0.4,
+        "accuracy": 0.35,
+        "omission": 0.15,
+        "commission": 0.10
+      }
+      }`
+
+    ).subscribe(() => {
+      this.userMessage = ''
+     }
+    )
+
   }
-
-
 }

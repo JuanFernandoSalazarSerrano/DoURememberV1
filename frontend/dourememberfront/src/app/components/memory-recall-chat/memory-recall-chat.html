@@ -58,23 +58,28 @@
     ></message-bubble>
   }
 
-    <div class="flex items-start gap-3 animate-fade-in" *ngIf="isTyping">
+  @if (userMessageHistory.length % 2 !== 0) {
+    <div class="flex items-start gap-3 animate-fade-in">
       <div class="flex-shrink-0">
-        <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
-          AI
-        </div>
+      <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
+        AI
+      </div>
       </div>
       <div class="flex-1 max-w-2xl">
-        <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 px-5 py-3 inline-block">
+      <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 px-5 py-3 inline-block">
+        <div class="flex items-center gap-2">
+          <span class="text-lg text-[#9CA3AA] animate-pulse" style="font-family: 'Nunito Sans', sans-serif;">Wait a moment</span>
           <div class="flex gap-1">
-            <div class="w-2 h-2 bg-[#9CA3AA] rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
-            <div class="w-2 h-2 bg-[#9CA3AA] rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
-            <div class="w-2 h-2 bg-[#9CA3AA] rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
-          </div>
+          <div class="w-2 h-2 bg-[#9CA3AA] rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+          <div class="w-2 h-2 bg-[#9CA3AA] rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+          <div class="w-2 h-2 bg-[#9CA3AA] rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
+        </div>
         </div>
       </div>
+      </div>
     </div>
-  </div>
+  }
+
   <div class="bg-white border-t border-gray-200 px-4 py-4 shadow-lg flex-shrink-0">
   <!-- <CHANGE> Added flex-shrink-0 to prevent footer from shrinking -->
     <div class="max-w-4xl mx-auto">
@@ -95,7 +100,7 @@
 
         <button
           type="submit"
-          [disabled]="!userMessage.trim()"
+          [disabled]="(userMessageHistory.length % 2 !== 0) || !userMessage.trim()"
           class="flex-shrink-0 bg-gradient-to-r from-[#F5821F] to-[#ff9940] text-white px-6 py-3 rounded-2xl font-semibold shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center gap-2"
           style="font-family: 'Quicksand', sans-serif;"
         >

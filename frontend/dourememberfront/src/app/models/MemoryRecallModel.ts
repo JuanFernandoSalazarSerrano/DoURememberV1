@@ -5,4 +5,6 @@ export class MemoryRecallModel
   MemoryRecallUrl: string = 'https://picsum.photos/id/129/4910/3252'
   groundTruthDescriptionSmall: string = '';
   groundTruthDescriptionComplete: string = '';
+  groundTruthFacts: string[] = [];
+  keyEntities: { id: string; label: string; type: string; canonical: string; synonyms: string[] }[] = [];
 }
