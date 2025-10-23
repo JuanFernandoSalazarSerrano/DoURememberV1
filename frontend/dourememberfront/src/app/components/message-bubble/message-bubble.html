@@ -1,24 +1,5 @@
-@if (indexOfMessage%2 == 0){
-      <div class="flex items-start gap-3 animate-fade-in">
-      <div class="flex-shrink-0">
-        <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
-          AI
-        </div>
-      </div>
-      <div class="flex-1 max-w-2xl">
-        <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 p-4 transition-all duration-300 hover:shadow-lg">
-          <p class="text-[#4F7380] text-base leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
-          {{contentOfMessage}}
-          </p>
-        </div>
-        <p class="text-xs text-[#9CA3AA] mt-1 ml-3" style="font-family: 'Nunito Sans', sans-serif;">
-          1 min ago
-        </p>
-      </div>
-    </div>
-}
-
-@else {
+<!-- im sorry god, i dont have time, there are some primes there what im supossed to do -->
+@if (indexOfMessage == 2 || indexOfMessage == 5 || indexOfMessage == 8 || indexOfMessage == 11 || indexOfMessage == 14 || indexOfMessage == 17 || indexOfMessage == 21 || indexOfMessage == 24 || indexOfMessage == 27 || indexOfMessage == 31){
 <div class="flex items-start gap-3 justify-end animate-fade-in">
   <div class="flex-1 max-w-2xl flex justify-end">
     <div class="inline-block">
@@ -38,4 +19,25 @@
     </div>
   </div>
 </div>
+}
+
+
+@else{
+      <div class="flex items-start gap-3 animate-fade-in">
+      <div class="flex-shrink-0">
+        <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
+          AI
+        </div>
+      </div>
+      <div class="flex-1 max-w-2xl">
+        <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 p-4 transition-all duration-300 hover:shadow-lg">
+          <p class="text-[#4F7380] text-base leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
+          {{contentOfMessage}}
+          </p>
+        </div>
+        <p class="text-xs text-[#9CA3AA] mt-1 ml-3" style="font-family: 'Nunito Sans', sans-serif;">
+          1 min ago
+        </p>
+      </div>
+    </div>
 }

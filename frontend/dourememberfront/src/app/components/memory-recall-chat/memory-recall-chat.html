@@ -1,7 +1,7 @@
 <div class="flex flex-col h-screen bg-gray-50 overflow-hidden">
-  <!-- <CHANGE> Added overflow-hidden to parent container -->
+  <!-- Added overflow-hidden to parent container -->
   <div class="bg-white border-b border-gray-200 px-6 py-4 shadow-sm flex-shrink-0">
-  <!-- <CHANGE> Added flex-shrink-0 to prevent header from shrinking -->
+  <!-- Added flex-shrink-0 to prevent header from shrinking -->
 <div class="bg-white border-b border-gray-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 mb-2">
     <h1 class="text-3xl font-bold text-[#4F7380] font-['Lexend_Deca']">
@@ -15,50 +15,26 @@
 </div>
 
   <div class="flex-1 overflow-y-auto px-4 py-6 space-y-4 min-h-0">
-  <!-- <CHANGE> Added min-h-0 to allow flex child to shrink and enable scroll -->
-    <div class="flex items-start gap-3 animate-fade-in">
-      <div class="flex-shrink-0">
-        <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
-          AI
-        </div>
-      </div>
-      <div class="flex-1 max-w-2xl">
-        <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg">
-          <div class="relative group">
-            <img
-              src={{memoryRecall.MemoryRecallUrl}}
-              alt="Memory Recall"
-              class="w-full h-64 object-cover"
-            />
-            <div class="absolute top-3 right-3">
-              <span class="px-3 py-1 bg-[#F5821F] text-white text-xs font-semibold rounded-full shadow-lg" style="font-family: 'Quicksand', sans-serif;">
-                PICTURE
-              </span>
-            </div>
-          </div>
-          <div class="p-4">
-            <p class="text-[#4F7380] text-base leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
-              {{ memoryRecall.groundTruthDescriptionComplete }}
-            </p>
-            <p class="text-xs text-[#9CA3AA] mt-2" style="font-family: 'Nunito Sans', sans-serif;">
-              Memory Recall #{{ memoryRecall.MemoryRecallId }}
-            </p>
-          </div>
-        </div>
-        <p class="text-xs text-[#9CA3AA] mt-1 ml-3" style="font-family: 'Nunito Sans', sans-serif;">
-          Just now
-        </p>
-      </div>
-    </div>
+  <!-- Added min-h-0 to allow flex child to shrink and enable scroll -->
+
 
   @for (individualUserMessage of userMessageHistory; track $index) {
+
+    @if (typeof individualUserMessage !== 'string') {
+      <memory-recall-in-chat
+        [memoryRecall]="individualUserMessage"
+      ></memory-recall-in-chat>
+    }
+        @if (typeof individualUserMessage == 'string') {
     <message-bubble
-    [contentOfMessage]="individualUserMessage"
-    [indexOfMessage]="$index + 1"
+      [contentOfMessage]="individualUserMessage"
+      [indexOfMessage]="$index + 1"
+      [indexOfMessagePlus3]="$index + 3"
     ></message-bubble>
+    }
   }
 
-  @if (userMessageHistory.length % 2 !== 0) {
+  @if (userMessageHistory.length%3 == 0 && userMessageHistory.length%2 != 0) {
     <div class="flex items-start gap-3 animate-fade-in">
       <div class="flex-shrink-0">
       <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
@@ -80,8 +56,71 @@
     </div>
   }
 
+@if (memoryRecallsInThisSession.length == 0) {
+  <!-- Added confetti animation container -->
+  <div class="bg-white border-t border-gray-200 px-4 py-8 shadow-lg flex-shrink-0 relative overflow-hidden">
+    <!-- Confetti Animation -->
+    <div class="confetti-container">
+      <div class="confetti confetti-orange" style="left: 10%; animation-delay: 0s;"></div>
+      <div class="confetti confetti-teal" style="left: 20%; animation-delay: 0.3s;"></div>
+      <div class="confetti confetti-gray" style="left: 30%; animation-delay: 0.6s;"></div>
+      <div class="confetti confetti-orange" style="left: 40%; animation-delay: 0.2s;"></div>
+      <div class="confetti confetti-teal" style="left: 50%; animation-delay: 0.8s;"></div>
+      <div class="confetti confetti-gray" style="left: 60%; animation-delay: 0.4s;"></div>
+      <div class="confetti confetti-orange" style="left: 70%; animation-delay: 0.1s;"></div>
+      <div class="confetti confetti-teal" style="left: 80%; animation-delay: 0.7s;"></div>
+      <div class="confetti confetti-gray" style="left: 90%; animation-delay: 0.5s;"></div>
+      <div class="confetti confetti-orange" style="left: 15%; animation-delay: 0.9s;"></div>
+      <div class="confetti confetti-teal" style="left: 25%; animation-delay: 0.15s;"></div>
+      <div class="confetti confetti-gray" style="left: 35%; animation-delay: 0.45s;"></div>
+      <div class="confetti confetti-orange" style="left: 45%; animation-delay: 0.75s;"></div>
+      <div class="confetti confetti-teal" style="left: 55%; animation-delay: 0.35s;"></div>
+      <div class="confetti confetti-gray" style="left: 65%; animation-delay: 0.65s;"></div>
+      <div class="confetti confetti-orange" style="left: 75%; animation-delay: 0.25s;"></div>
+      <div class="confetti confetti-teal" style="left: 85%; animation-delay: 0.55s;"></div>
+      <div class="confetti confetti-gray" style="left: 95%; animation-delay: 0.85s;"></div>
+    </div>
+
+  <div class="max-w-4xl mx-auto flex justify-center relative z-10">
+    <button
+      [routerLink]="['/statistics/session/1']"
+      type="button"
+      class="relative bg-gradient-to-r from-[#F5821F] to-[#ff9940] text-white px-12 py-6 rounded-3xl font-bold text-2xl shadow-2xl hover:shadow-3xl hover:scale-105 active:scale-95 transition-all duration-300 animate-pulse flex items-center gap-4 group overflow-hidden"
+      style="font-family: 'Quicksand', sans-serif;"
+    >
+      <!-- Animated background shine effect -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+      <!-- Success icon with bounce animation -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 animate-bounce" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>
+
+      <!-- Main text -->
+      <span class="relative z-10">You completed your test, nice job!</span>
+
+      <!-- Celebration icon with bounce animation -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 animate-bounce" style="animation-delay: 0.2s;" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Confetti-like decorative elements -->
+  <div class="max-w-4xl mx-auto mt-4 flex justify-center gap-2 relative z-10">
+    <span class="inline-block w-3 h-3 bg-[#F5821F] rounded-full animate-ping" style="animation-duration: 1.5s;"></span>
+    <span class="inline-block w-3 h-3 bg-[#4F7380] rounded-full animate-ping" style="animation-duration: 2s; animation-delay: 0.3s;"></span>
+    <span class="inline-block w-3 h-3 bg-[#F5821F] rounded-full animate-ping" style="animation-duration: 1.8s; animation-delay: 0.6s;"></span>
+  </div>
+</div>
+
+
+
+}
+
+@else {
   <div class="bg-white border-t border-gray-200 px-4 py-4 shadow-lg flex-shrink-0">
-  <!-- <CHANGE> Added flex-shrink-0 to prevent footer from shrinking -->
+  <!-- Added flex-shrink-0 to prevent footer from shrinking -->
     <div class="max-w-4xl mx-auto">
       <form class="flex items-end gap-3" (submit)="sendMessage(userMessage)" (keydown.enter)="sendMessage(userMessage)">
         <div class="flex-1 relative">
@@ -100,7 +139,7 @@
 
         <button
           type="submit"
-          [disabled]="(userMessageHistory.length % 2 !== 0) || !userMessage.trim()"
+          [disabled]="(userMessageHistory.length % 2 !== 0) || memoryRecallsInThisSession.length == 0 || !userMessage.trim()"
           class="flex-shrink-0 bg-gradient-to-r from-[#F5821F] to-[#ff9940] text-white px-6 py-3 rounded-2xl font-semibold shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center gap-2"
           style="font-family: 'Quicksand', sans-serif;"
         >
@@ -136,6 +175,7 @@
       </div>
     </div>
   </div>
+}
 </div>
 
 
@@ -153,5 +193,54 @@
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Added confetti animation styles */
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: -20px;
+  opacity: 0;
+  animation: confetti-fall 3s ease-in infinite;
+}
+
+.confetti-orange {
+  background-color: #F5821F;
+  border-radius: 50%;
+}
+
+.confetti-teal {
+  background-color: #4F7380;
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.confetti-gray {
+  background-color: #9CA3AA;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+@keyframes confetti-fall {
+  0% {
+    top: -20px;
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    top: 100%;
+    opacity: 0.3;
+    transform: translateX(50px) rotate(720deg);
+  }
 }
 </style>

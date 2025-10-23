@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class MessageBubble {
   @Input() contentOfMessage!: string;
   @Input() indexOfMessage!: number;
+  @Input() indexOfMessagePlus3!: number;
 }

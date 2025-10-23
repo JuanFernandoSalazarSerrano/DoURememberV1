@@ -3,7 +3,7 @@ from rest_framework.response import Response
 import socket
 from rest_framework import status
 
-HOST = '192.168.80.13'
+HOST = '192.168.80.14'
 PORT = 2828
 
 @api_view(['POST'])

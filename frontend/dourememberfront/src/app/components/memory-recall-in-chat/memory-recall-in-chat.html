@@ -1,0 +1,34 @@
+<div class="flex items-start gap-3 animate-fade-in">
+  <div class="flex-shrink-0">
+    <div class="w-10 h-10 rounded-full bg-[#F5821F] flex items-center justify-center text-white font-semibold">
+      AI
+    </div>
+  </div>
+  <div class="flex-1 max-w-2xl">
+    <div class="bg-white rounded-2xl rounded-tl-none shadow-md border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg">
+      <div class="relative group">
+        <img
+          src={{memoryRecall.MemoryRecallUrl}}
+          alt="Memory Recall"
+          class="w-full h-64 object-cover"
+        />
+        <div class="absolute top-3 right-3">
+          <span class="px-3 py-1 bg-[#F5821F] text-white text-xs font-semibold rounded-full shadow-lg" style="font-family: 'Quicksand', sans-serif;">
+            PICTURE
+          </span>
+        </div>
+      </div>
+      <div class="p-4">
+        <p class="text-[#4F7380] text-base leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
+          {{ memoryRecall.groundTruthDescriptionComplete }}
+        </p>
+        <p class="text-xs text-[#9CA3AA] mt-2" style="font-family: 'Nunito Sans', sans-serif;">
+          Memory Recall #{{ memoryRecall.MemoryRecallId }}
+        </p>
+      </div>
+    </div>
+    <p class="text-xs text-[#9CA3AA] mt-1 ml-3" style="font-family: 'Nunito Sans', sans-serif;">
+      Just now
+    </p>
+  </div>
+</div>

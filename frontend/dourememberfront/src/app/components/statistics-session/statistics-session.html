@@ -1,0 +1,140 @@
+<!-- Test Results Statistics Graph -->
+<div class="w-full bg-gray-50 py-8 px-4">
+  <div class="max-w-[1400px] mx-auto bg-white rounded-2xl shadow-lg p-8">
+    <!-- Header -->
+    <div class="mb-6">
+      <h2 class="text-4xl font-bold mb-2" style="color: #4F7380; font-family: 'Lexend Deca', sans-serif;">
+        Test Results from your Memory recall session!
+      </h2>
+      <p class="text-xl" style="color: #9CA3AA; font-family: 'Nunito Sans', sans-serif;">
+        Performance trends over the last 10 tests
+      </p>
+    </div>
+
+    <!-- Graph Container -->
+    <div class="bg-gray-50 rounded-xl p-6 mb-6">
+      <!--  Reduced SVG height from 500px to 350px and adjusted viewBox height from 400 to 280 -->
+      <svg viewBox="0 0 1200 280" class="w-full" style="height: 350px;">
+        <!-- Grid Lines -->
+        <g stroke="#E5E7EB" stroke-width="1">
+          <line x1="100" y1="40" x2="1100" y2="40" />
+          <line x1="100" y1="90" x2="1100" y2="90" />
+          <line x1="100" y1="140" x2="1100" y2="140" />
+          <line x1="100" y1="190" x2="1100" y2="190" />
+          <line x1="100" y1="240" x2="1100" y2="240" />
+        </g>
+
+        <!-- Y-axis Labels -->
+        <g style="font-family: 'Nunito Sans', sans-serif; font-size: 18px;" fill="#9CA3AA">
+          <text x="80" y="45" text-anchor="end">100%</text>
+          <text x="80" y="95" text-anchor="end">75%</text>
+          <text x="80" y="145" text-anchor="end">50%</text>
+          <text x="80" y="195" text-anchor="end">25%</text>
+          <text x="80" y="245" text-anchor="end">0%</text>
+        </g>
+
+        <!-- X-axis Labels -->
+        <g style="font-family: 'Nunito Sans', sans-serif; font-size: 18px;" fill="#9CA3AA">
+          <text x="200" y="270" text-anchor="middle">Test 1</text>
+          <text x="300" y="270" text-anchor="middle">Test 2</text>
+          <text x="400" y="270" text-anchor="middle">Test 3</text>
+          <text x="500" y="270" text-anchor="middle">Test 4</text>
+          <text x="600" y="270" text-anchor="middle">Test 5</text>
+          <text x="700" y="270" text-anchor="middle">Test 6</text>
+          <text x="800" y="270" text-anchor="middle">Test 7</text>
+          <text x="900" y="270" text-anchor="middle">Test 8</text>
+          <text x="1000" y="270" text-anchor="middle">Test 9</text>
+          <text x="1100" y="270" text-anchor="middle">Test 10</text>
+        </g>
+
+        <!-- Accuracy Line (Orange) -->
+        <polyline
+          points="200,140 300,100 400,120 500,80 600,90 700,60 800,70 900,50 1000,60 1100,40"
+          fill="none"
+          stroke="#F5821F"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- Response Time Line (Teal) -->
+        <polyline
+          points="200,180 300,170 400,160 500,150 600,140 700,130 800,125 900,115 1000,110 1100,100"
+          fill="none"
+          stroke="#4F7380"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- Data Points - Accuracy (Orange) -->
+        <circle cx="200" cy="140" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="300" cy="100" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="400" cy="120" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="500" cy="80" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="600" cy="90" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="700" cy="60" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="800" cy="70" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="900" cy="50" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="1000" cy="60" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="1100" cy="40" r="8" fill="#F5821F" class="cursor-pointer hover:r-10 transition-all" />
+
+        <!-- Data Points - Response Time (Teal) -->
+        <circle cx="200" cy="180" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="300" cy="170" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="400" cy="160" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="500" cy="150" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="600" cy="140" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="700" cy="130" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="800" cy="125" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="900" cy="115" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="1000" cy="110" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+        <circle cx="1100" cy="100" r="8" fill="#4F7380" class="cursor-pointer hover:r-10 transition-all" />
+      </svg>
+    </div>
+
+    <!-- Legend -->
+    <div class="flex justify-center gap-12 mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-6 h-6 rounded-full" style="background-color: #F5821F;"></div>
+        <span class="text-xl font-medium" style="color: #4F7380; font-family: 'Nunito Sans', sans-serif;">
+          Accuracy Rate
+        </span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-6 h-6 rounded-full" style="background-color: #4F7380;"></div>
+        <span class="text-xl font-medium" style="color: #4F7380; font-family: 'Nunito Sans', sans-serif;">
+          Response Time (normalized)
+        </span>
+      </div>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-orange-50 rounded-xl p-6 text-center border-2" style="border-color: #F5821F;">
+        <p class="text-xl mb-2" style="color: #9CA3AA; font-family: 'Nunito Sans', sans-serif;">
+          Average Accuracy
+        </p>
+        <p class="text-5xl font-bold" style="color: #F5821F; font-family: 'Lexend Deca', sans-serif;">
+          82%
+        </p>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-6 text-center border-2" style="border-color: #4F7380;">
+        <p class="text-xl mb-2" style="color: #9CA3AA; font-family: 'Nunito Sans', sans-serif;">
+          Avg Response Time
+        </p>
+        <p class="text-5xl font-bold" style="color: #4F7380; font-family: 'Lexend Deca', sans-serif;">
+          3.2s
+        </p>
+      </div>
+      <div class="bg-green-50 rounded-xl p-6 text-center border-2 border-green-300">
+        <p class="text-xl mb-2" style="color: #9CA3AA; font-family: 'Nunito Sans', sans-serif;">
+          Tests Completed
+        </p>
+        <p class="text-5xl font-bold" style="color: #4F7380; font-family: 'Lexend Deca', sans-serif;">
+          10
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
