@@ -6,6 +6,8 @@ export class User {
   username: string = 'nousername'
   password: string = 'nopassword'
   role: string = 'norole';
+  condition: string = 'nocondition'
+  carer: string = 'nocarer'
 }
 
 // export class User {

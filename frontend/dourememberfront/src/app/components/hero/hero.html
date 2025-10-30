@@ -1,54 +1,77 @@
-<section class="relative min-h-[500px] bg-gradient-to-b from-gray-50 to-white py-16 px-4 overflow-hidden">
-  <div class="max-w-5xl mx-auto relative mt-7">
+<section class="relative min-h-[500px] bg-gradient-to-b from-gray-50 to-white py-7 px-4 overflow-hidden">
+  <!-- Increased opacity and adjusted positioning so brain images are visible behind content -->
+  <!-- Large brain - top right, rotated and faded -->
+  <div class="absolute -top-20 -right-20 w-96 h-96 opacity-[0.08] pointer-events-none z-0">
+    <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full rotate-[25deg] transform scale-110" style="filter: brightness(0) saturate(100%) invert(31%) sepia(13%) saturate(1247%) hue-rotate(147deg) brightness(95%) contrast(88%);" />
+  </div>
+
+  <!-- Medium brain - left side, different rotation -->
+  <div class="absolute top-1/3 -left-16 w-64 h-64 opacity-[0.1] pointer-events-none z-0">
+    <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full -rotate-[15deg] transform" style="filter: brightness(0) saturate(100%) invert(47%) sepia(45%) saturate(1247%) hue-rotate(360deg) brightness(95%) contrast(88%);" />
+  </div>
+
+  <!-- Small brain - bottom right, subtle accent -->
+  <div class="absolute bottom-32 right-1/4 w-32 h-32 opacity-[0.12] pointer-events-none animate-pulse z-20">
+    <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full rotate-[45deg]"/>
+  </div>
+
+  <div class="max-w-5xl mx-auto relative mt-16 z-10">
     <!-- Hero Heading -->
     <div class="text-center mb-12">
-      <h1 class="quicksand-1 text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-2">
+      <!-- Enhanced heading with better spacing and added subtle text shadow -->
+      <h1 class="quicksand-1 text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-2 relative z-10">
         Book a medical appointment
-        <span class="block text-[#4F7380]">in DoURemember</span>
+        <span class="block text-[#4F7380] mt-2">in DoURemember</span>
       </h1>
     </div>
 
+    <!-- Spacer -->
+    <div class="h-12"></div>
+
     <!-- Search Form Container -->
-    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 relative z-10">
+    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 relative z-10 backdrop-blur-sm">
       <!-- Toggle Buttons -->
-      <!-- Removed SVG icons and updated colors to match navbar palette -->
-      <div class="flex gap-2 mb-6">
-        <button class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-[#4F7380] bg-white text-gray-800 font-medium quicksand-1 hover:bg-gray-50 transition-colors">
-          On-site
+      <div class="flex gap-3 mb-6">
+        <button class="group relative flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-gray-200 bg-white text-gray-700 font-semibold quicksand-1 hover:border-[#e0730d] hover:text-[#e0730d] hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-300 overflow-hidden">
+          <span class="absolute inset-0 bg-gradient-to-r from-[#e0730d]/0 to-[#e0730d]/0 group-hover:from-[#e0730d]/5 group-hover:to-[#e0730d]/10 transition-all duration-300"></span>
+          <span class="relative">On-site</span>
         </button>
-        <button class="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#4F7380] bg-opacity-10 text-gray-800 font-medium quicksand-1 hover:bg-[#4F7380] hover:bg-opacity-20 transition-colors">
-          Remote
+
+        <button class="group relative flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#e0730d] to-[#d66a0c] text-white font-semibold quicksand-1 shadow-lg shadow-[#e0730d]/30 hover:shadow-xl hover:shadow-[#e0730d]/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 overflow-hidden">
+          <span class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></span>
+          <span class="relative">Remote</span>
         </button>
       </div>
 
       <!-- Search Form -->
       <div class="flex flex-col md:flex-row gap-4">
         <!-- Name/Specialty Input -->
-        <!-- Removed search icon SVG and updated focus color -->
-        <div class="flex-1 relative">
+        <div class="flex-1 relative group">
           <input
             type="text"
             placeholder="Name, specialty, practice"
-            class="w-full px-4 py-4 border-2 border-[#9CA3AA] rounded-lg lexend-deca-1 text-gray-700 placeholder-[#9CA3AA] focus:outline-none focus:border-[#4F7380] transition-colors"
+            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl lexend-deca-1 text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:border-[#e0730d] focus:ring-4 focus:ring-[#e0730d]/10 hover:border-gray-300 hover:shadow-md transition-all duration-300"
           />
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-[#e0730d]/0 via-[#e0730d]/0 to-[#4F7380]/0 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none -z-10 blur-xl"></div>
         </div>
 
-        <!-- Location Input -->
-        <!-- Removed location icon SVG and updated focus color -->
-        <div class="flex-1 relative">
+        <!-- Updated location input to match the improved styling of name/specialty input -->
+        <div class="flex-1 relative group">
           <input
             type="text"
             placeholder="Where? (city, zip code, address)"
-            class="w-full px-4 py-4 border-2 border-[#9CA3AA] rounded-lg lexend-deca-1 text-gray-700 placeholder-[#9CA3AA] focus:outline-none focus:border-[#4F7380] transition-colors"
+            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl lexend-deca-1 text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:border-[#4F7380] focus:ring-4 focus:ring-[#4F7380]/10 hover:border-gray-300 hover:shadow-md transition-all duration-300"
           />
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-[#4F7380]/0 via-[#4F7380]/0 to-[#e0730d]/0 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none -z-10 blur-xl"></div>
         </div>
 
         <!-- Search Button -->
-        <!-- Updated button color to use orange accent from palette -->
-        <button class="px-8 py-4 bg-[#F5821F] hover:bg-[#e0730d] text-white font-semibold rounded-lg quicksand-1 transition-colors whitespace-nowrap shadow-sm">
-          Search
+        <button class="group relative flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#e0730d] to-[#d66a0c] text-white font-semibold quicksand-1 shadow-lg shadow-[#e0730d]/30 hover:shadow-xl hover:shadow-[#e0730d]/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 overflow-hidden">
+          <span class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></span>
+          <span class="relative">Search</span>
         </button>
       </div>
     </div>
   </div>
 </section>
+

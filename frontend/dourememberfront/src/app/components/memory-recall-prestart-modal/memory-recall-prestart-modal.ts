@@ -13,9 +13,15 @@ export class MemoryRecallPrestartModal {
 
   @Input() memoryRecall!: MemoryRecallModel;
 
+  openInvite: boolean = false;
 
   @Output() closeModalEventEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   closeMemoryRecallModal(){
-    this.closeModalEventEmitter.emit(false)
+    this.closeModalEventEmitter.emit()
+  }
+
+  @Output() openModalEventEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  openInviteMemoryRecall(){
+    this.openModalEventEmitter.emit()
   }
 }

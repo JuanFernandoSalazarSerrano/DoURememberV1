@@ -34,9 +34,18 @@
         <app-memory-recall-prestart-modal
           [memoryRecall]="TestMemoryRecall"
           (closeModalEventEmitter)="openMemoryRecallModal()"
+          (openModalEventEmitter)="openInviteMemoryRecall()"
         ></app-memory-recall-prestart-modal>
       }
+
+
+        @if (openInvite) {
+        <memory-recall-invitation-modal
+        (openModalEventEmitter)="openInviteMemoryRecall()"
+        ></memory-recall-invitation-modal>
+}
       </div>
+
 
 
 
