@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
-  selector: 'statistics-session',
+  selector: 'patient-edit-profile',
   imports: [RouterModule],
-  templateUrl: './statistics-session.html'
+  templateUrl: './patient-edit-profile.html',
 })
-export class StatisticsSession {
+export class PatientEditProfile { }
 
-}

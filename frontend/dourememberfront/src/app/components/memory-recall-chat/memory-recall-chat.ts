@@ -1,4 +1,3 @@
-import { memoryRecalls } from './../../data/memoryrecall.data';
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
@@ -6,8 +5,6 @@ import { MessageBubble } from '../message-bubble/message-bubble';
 import { FormsModule } from '@angular/forms';
 import { GroundTruthService } from '../../services/ground-truth-service';
 import { SseClient } from 'ngx-sse-client';
-import { HttpHeaders } from '@angular/common/http';
-import { GroundTruthResponse } from '../../models/GroundTruthResponse';
 import { NgZone } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { MemoryRecallService } from '../../services/memoryRecallService';

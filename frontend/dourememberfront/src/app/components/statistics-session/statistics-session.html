@@ -2,19 +2,20 @@
 <div class="w-full bg-gray-50 py-8 px-4">
   <div class="max-w-[1400px] mx-auto bg-white rounded-2xl shadow-lg p-8">
     <!-- Header -->
-    <div class="mb-6">
+    <div class="mb-6 flex items-center justify-between">
       <h2 class="text-4xl font-bold mb-2" style="color: #4F7380; font-family: 'Lexend Deca', sans-serif;">
         Test Results from your Memory recall session!
       </h2>
-      <p class="text-xl" style="color: #9CA3AA; font-family: 'Nunito Sans', sans-serif;">
-        Performance trends over the last 10 tests
-      </p>
+      <button [routerLink]="['/patient/1']" class="lexend-deca-1 bg-[#4F7380] text-white px-6 py-2 rounded-full hover:bg-[#4F73809]">
+        Go back to Profile
+      </button>
     </div>
 
     <!-- Graph Container -->
     <div class="bg-gray-50 rounded-xl p-6 mb-6">
       <!--  Reduced SVG height from 500px to 350px and adjusted viewBox height from 400 to 280 -->
       <svg viewBox="0 0 1200 280" class="w-full" style="height: 350px;">
+
         <!-- Grid Lines -->
         <g stroke="#E5E7EB" stroke-width="1">
           <line x1="100" y1="40" x2="1100" y2="40" />

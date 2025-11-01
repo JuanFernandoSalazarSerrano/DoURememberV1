@@ -1,11 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { User } from '../../models/User';
+import { PatientCard } from '../patient-card/patient-card';
+import { PatientsService } from '../../services/patientsService';
 
 @Component({
-  selector: 'app-doctor-homepage',
-  imports: [],
+  selector: 'doctor-homepage',
+  imports: [PatientCard],
   templateUrl: './doctor-homepage.html',
-  styleUrl: './doctor-homepage.css'
 })
+
 export class DoctorHomepage {
+
+  patients = signal<User[]>([]);
+
+  doctor!: string;
+
+  constructor(private readonly patientsService: PatientsService){
+    this.patientsService.findAll().subscribe(allPatients => {
+      this.patients.set(allPatients)
+    })
+
+    // TODO doctor name from role in db extract it from the patients (its bad ik)
+
+    this.doctor = 'Rafel'
+  }
 
 }

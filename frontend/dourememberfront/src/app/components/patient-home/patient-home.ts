@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'statistics-session',
+  selector: 'patient-home',
   imports: [RouterModule],
-  templateUrl: './statistics-session.html'
+  templateUrl: './patient-home.html',
 })
-export class StatisticsSession {
+export class PatientHome {
 
 }

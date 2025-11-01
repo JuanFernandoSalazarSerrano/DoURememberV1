@@ -1,0 +1,112 @@
+<section class="relative min-h-screen bg-gradient-to-b from-gray-50 to-white py-4 px-2 overflow-hidden">
+  <!-- Decorative brain images for visual consistency -->
+  <div class="absolute top-10 right-10 w-40 h-40 opacity-[0.08] pointer-events-none z-0 animate-pulse">
+    <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full rotate-[25deg]" style="filter: brightness(0) saturate(100%) invert(47%) sepia(45%) saturate(1247%) hue-rotate(360deg) brightness(95%) contrast(88%);" />
+  </div>
+
+  <div class="absolute bottom-20 left-10 w-32 h-32 opacity-[0.06] pointer-events-none z-0">
+    <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full -rotate-[20deg]" style="filter: brightness(0) saturate(100%) invert(31%) sepia(13%) saturate(1247%) hue-rotate(147deg) brightness(95%) contrast(88%);" />
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+
+    <!-- Matching Words Game Card -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <!-- Header with gradient background -->
+      <div class="relative bg-gradient-to-r from-[#e0730d] to-[#d66a0c] p-4">
+        <div class="absolute top-0 right-0 w-24 h-24 opacity-10">
+          <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full rotate-12" />
+        </div>
+
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-1">
+            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+              </svg>
+            </div>
+            <h1 class="quicksand-1 text-2xl md:text-3xl font-bold text-white">
+              Word Matching Challenge
+            </h1>
+          </div>
+          <p class="nunito-sans-1 text-white/90 text-sm">
+            Connect related words to strengthen cognitive associations
+          </p>
+        </div>
+      </div>
+
+      <div class="p-3">
+        <!-- Instructions -->
+        <div class="mb-3 p-3 rounded-xl bg-gradient-to-r from-[#4F7380]/10 to-[#4F7380]/5 border border-[#4F7380]/20">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#4F7380] to-[#3d5a64] flex items-center justify-center flex-shrink-0 shadow-md">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p class="nunito-sans-1 text-sm text-gray-700">
+              <span class="font-bold">How to Play:</span> Drag and drop words to match pairs. Find all correct connections to complete the challenge.
+            </p>
+          </div>
+        </div>
+
+        <!-- Game iframe container -->
+        <div class="relative rounded-xl overflow-hidden shadow-2xl border-4 border-gray-100 bg-gradient-to-br from-gray-50 to-white">
+          <div class="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-[#e0730d]/10 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-[#4F7380]/10 to-transparent pointer-events-none"></div>
+
+          <div class="relative w-full" style="padding-bottom: 75%; min-height: 450px;">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src="https://wordwall.net/embed/2c95563d675e48a69aa3813017089baf?themeId=65&templateId=3&fontStackId=0"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Stat cards -->
+        <div class="mt-3 flex gap-2">
+          <div class="flex-1 p-2 rounded-lg bg-gradient-to-br from-[#e0730d]/10 to-[#e0730d]/5 border border-[#e0730d]/20">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#e0730d] to-[#d66a0c] flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="nunito-sans-1 text-xs text-gray-600 font-semibold">Duration</p>
+                <p class="quicksand-1 text-sm font-bold text-gray-800">3-7 min</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-1 p-2 rounded-lg bg-gradient-to-br from-[#4F7380]/10 to-[#4F7380]/5 border border-[#4F7380]/20">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-[#4F7380] flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="nunito-sans-1 text-xs text-gray-600 font-semibold">Difficulty</p>
+                <p class="quicksand-1 text-sm font-bold text-gray-800">Easy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action button -->
+        <div class="mt-3 flex justify-center">
+          <button class="group relative flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#4F7380] to-[#3d5a64] text-white font-bold quicksand-1 shadow-lg shadow-[#4F7380]/30 hover:shadow-xl hover:shadow-[#4F7380]/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 overflow-hidden">
+            <span class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></span>
+            <svg class="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span class="relative z-10">Restart Game</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
