@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { testAiResponses } from '../../data/airesponse.data';
 
 @Component({
-  selector: 'statistics-session',
-  imports: [RouterModule, BaseChartDirective],
-  templateUrl: './statistics-session.html'
+  selector: 'doctor-pov-patient-statistics',
+  imports: [CommonModule, BaseChartDirective],
+  templateUrl: './doctor-pov-patient-statistics.html'
 })
-export class StatisticsSession {
+
+export class DoctorPovPatientStatistics {
+  aiResponse = testAiResponses[0];
+
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     scales: {

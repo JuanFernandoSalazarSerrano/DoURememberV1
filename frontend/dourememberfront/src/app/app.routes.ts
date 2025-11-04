@@ -11,6 +11,9 @@ import { LineMatchingGame } from './components/line-matching-game/line-matching-
 import { PatientHome } from './components/patient-home/patient-home';
 import { PatientTests } from './components/patient-tests/patient-tests';
 import { PatientEditProfile } from './components/patient-edit-profile/patient-edit-profile';
+import { DoctorPovPatientStatistics } from './components/doctor-pov-patient-statistics/doctor-pov-patient-statistics';
+import { Auth } from './components/auth/auth';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -35,8 +38,13 @@ export const routes: Routes = [
     component: StatisticsSession
   },
     {
-    path: 'doctor/patients/1', // 1 is doctor id
-    component: DoctorHomepage
+    path: 'doctor/1/patients', // 1 is doctor id
+    component: DoctorHomepage,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'doctor/1/patient/1/statistics', // 1 is patient id
+    component: DoctorPovPatientStatistics
   },
       {
     path: 'sessions/patient/1', // 1 is patient id
@@ -65,5 +73,9 @@ export const routes: Routes = [
     {
     path: 'patient/1/edit', // 1 is patient id
     component: PatientEditProfile
+  },
+  {
+    path: 'login', // 1 is patient id
+    component: Auth
   },
 ];

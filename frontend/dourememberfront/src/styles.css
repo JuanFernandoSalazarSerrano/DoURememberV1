@@ -2,6 +2,34 @@
 
 @import "tailwindcss";
 
+@import 'ngx-toastr/toastr';
+
+/* toast override color douremember palet config */
+
+    .toast {
+      background-color: #222 !important;
+      color: #fff !important;
+      border-radius: 4px;
+    }
+
+    /* Per-type examples */
+    .toast-success {
+      background-color: #F5821F !important;
+      color: #fff !important;
+    }
+    .toast-error {
+      background-color: #e74c3c !important;
+      color: #fff !important;
+    }
+    .toast-info {
+      background-color: #3498db !important;
+      color: #fff !important;
+    }
+    .toast-warning {
+      background-color: #f39c12 !important;
+      color: #222 !important;
+    }
+
 /* #4F7380 → a muted teal blue. #F5821F → a bright orange. #9CA3AA → a medium gray. COLORS */
 
 

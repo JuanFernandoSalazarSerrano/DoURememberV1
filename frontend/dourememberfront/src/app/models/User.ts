@@ -1,5 +1,6 @@
 export class User {
   id: number = 0;
+  profilePicture: string = 'https://noimageurl.com';
   name: string = 'noname';
   lastname: string = 'nolastname';
   email: string = 'noemail';

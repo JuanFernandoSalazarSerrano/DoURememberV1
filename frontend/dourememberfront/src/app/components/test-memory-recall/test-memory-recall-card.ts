@@ -23,6 +23,5 @@ export class TestMemoryRecallCard {
   }
   openInviteMemoryRecall(){
     this.openInvite = !this.openInvite
-    console.log(this.openInvite)
   }
 }

@@ -3,6 +3,7 @@ import { User } from "../models/User";
 export const testUsers: User[] = [
   {
     id: 1,
+    profilePicture: 'https://picsum.photos/id/57/367/267',
     name: 'John',
     lastname: 'Doe',
     email: 'john@example.com',
@@ -14,6 +15,7 @@ export const testUsers: User[] = [
   },
   {
     id: 2,
+    profilePicture: 'https://picsum.photos/id/64/367/267',
     name: 'Jane',
     lastname: 'Smith',
     email: 'jane@example.com',
@@ -25,6 +27,7 @@ export const testUsers: User[] = [
   },
   {
     id: 3,
+    profilePicture: 'https://picsum.photos/id/950/4951/3301',
     name: 'Bob',
     lastname: 'Johnson',
     email: 'bob@example.com',
@@ -36,6 +39,7 @@ export const testUsers: User[] = [
   },
   {
     id: 4,
+    profilePicture: 'https://picsum.photos/id/100/367/267',
     name: 'Alice',
     lastname: 'Williams',
     email: 'alice@example.com',

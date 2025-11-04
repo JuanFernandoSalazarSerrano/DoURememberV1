@@ -38,7 +38,6 @@ export class MemoryRecallChat {
 
     if (this.router.currentNavigation()?.extras.state) {
       this.memoryRecall = this.router.currentNavigation()?.extras.state!['memoryRecall'];
-      console.log('adfsaf')
       this.userMessageHistory = [this.memoryRecall];
     }
 
@@ -96,7 +95,6 @@ export class MemoryRecallChat {
   sendMessage(userAnswer: string){
 
     this.userMessageHistory.push(userAnswer, 'AI RESPONSE, NOT REAL FOR TESTING POURPUSES')
-
 
     this.userMessage = ''
 
