@@ -12,7 +12,7 @@
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-@for (Memory of memoryRecallsList; track $index) {
+@for (Memory of memoryRecallsList(); track $index) {
   <test-memory-recall
     [TestMemoryRecall]="Memory"
   ></test-memory-recall>

@@ -12,7 +12,7 @@
 
       <div class="flex items-center gap-4">
         <h2 class="text-xl font-semibold text-[#4F7380]" style="font-family: 'Lexend Deca', sans-serif;">
-          Memory Recall: <span class="text-[#F5821F]">{{memoryRecall.MemoryRecallId}}</span>
+          Memory Recall: <span class="text-[#F5821F]">{{memoryRecall.memoryrecallid}}</span>
         </h2>
         <button
           (click)="closeMemoryRecallModal()"
@@ -28,8 +28,8 @@
       <div class="relative group mb-8">
         <div class="relative overflow-hidden rounded-xl shadow-lg">
           <img
-            [src]="memoryRecall.MemoryRecallUrl"
-            [alt]="'Memory Recall ' + memoryRecall.MemoryRecallId"
+            [src]="memoryRecall.memoryrecallurl"
+            [alt]="'Memory Recall ' + memoryRecall.memoryrecallid"
             class="w-full h-auto max-h-[500px] object-cover transition-transform duration-500 group-hover:scale-105">
 
           <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg bg-white"
@@ -50,7 +50,7 @@
                       flex items-end p-6">
             <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
               <p class="text-white text-lg leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
-                {{ memoryRecall.groundTruthDescriptionSmall }}
+                {{ memoryRecall.groundtruthdescriptionsmall }}
               </p>
             </div>
           </div>
@@ -68,7 +68,7 @@
           Ground-Truth
         </h3>
         <p class="text-gray-700 text-lg leading-relaxed" style="font-family: 'Nunito Sans', sans-serif;">
-          {{ memoryRecall.groundTruthDescriptionComplete }}
+          {{ memoryRecall.groundtruthdescriptioncomplete }}
         </p>
       </div>
     </div>

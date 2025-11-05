@@ -18,6 +18,17 @@
 <!-- Edit User Form Section -->
 <section class="relative py-10 px-6 bg-gradient-to-b from-gray-50 to-white">
   <div class="max-w-5xl mx-auto relative z-10">
+    <!-- Back Button -->
+    <div class="mb-6">
+      <div [routerLink]="['/patient/1']" class="group inline-flex items-center gap-3 bg-white rounded-2xl shadow-xl px-5 py-3 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-[#4F7380] cursor-pointer">
+        <div class="w-10 h-10 rounded-xl bg-[#4F7380] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </div>
+        <span class="quicksand-1 text-lg font-semibold text-gray-800">Back to Patient Home</span>
+      </div>
+    </div>
 
     <!-- Section Header -->
     <div class="text-center mb-8">
@@ -187,7 +198,7 @@
             </div>
           </button>
 
-          <button type="button" class="group flex-1 relative bg-white border border-gray-300 text-gray-700 py-3.5 px-8 rounded-xl font-bold text-lg shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300">
+          <button type="button" [routerLink]="['/patient/1']" class="group flex-1 relative bg-white border border-gray-300 text-gray-700 py-3.5 px-8 rounded-xl font-bold text-lg shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300">
             <div class="relative flex items-center justify-center gap-3">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

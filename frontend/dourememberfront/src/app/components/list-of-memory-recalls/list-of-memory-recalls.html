@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Recalls - DoURemember</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Lexend+Deca:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .quicksand-1 { font-family: 'Quicksand', sans-serif; }
+    .lexend-deca-1 { font-family: 'Lexend Deca', sans-serif; }
+    .nunito-sans-1 { font-family: 'Nunito Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<section class="relative min-h-screen py-12 px-4 overflow-hidden">
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Back Button -->
+    <div class="mb-6">
+      <div [routerLink]="['/patient/1']" class="group inline-flex items-center gap-3 bg-white rounded-2xl shadow-xl px-5 py-3 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-[#4F7380] cursor-pointer">
+        <div class="w-10 h-10 rounded-xl bg-[#4F7380] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </div>
+        <span class="quicksand-1 text-lg font-semibold text-gray-800">Back to Patient Home</span>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="inline-block bg-white border-2 border-[#9CA3AA] rounded-2xl shadow-xl mb-4">
+        <div class="px-8 py-8">
+          <h1 class="quicksand-1 text-4xl md:text-5xl font-bold text-[#F5821F]">
+            My Memory Recalls
+          </h1>
+        </div>
+      </div>
+      <p class="nunito-sans-1 text-[#9CA3AA] text-lg">View and manage your uploaded memory recalls</p>
+    </div>
+
+    <!-- Memory Recalls List -->
+    <div class="space-y-6 mb-8">
+      <div
+        *ngFor="let recall of memoryRecalls"
+        class="group bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-[#F5821F] cursor-pointer"
+      >
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-6 flex-1">
+            <!-- Icon -->
+            <div class="w-16 h-16 rounded-xl bg-[#F5821F] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1 min-w-0">
+              <h3 class="quicksand-1 text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                {{ recall.title }}
+              </h3>
+              <p class="nunito-sans-1 text-[#9CA3AA] text-sm">
+                Created on {{ recall.date }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Arrow Icon -->
+          <svg class="w-8 h-8 text-[#F5821F] group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Button -->
+    <div class="group relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border-2 border-transparent hover:border-[#9CA3AA]">
+      <div [routerLink]="['/patient/1/uploadMemory']" class="relative flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+        <div class="flex items-center gap-6">
+          <!-- Icon -->
+          <div class="w-20 h-20 rounded-2xl bg-[#9CA3AA] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+          </div>
+
+          <!-- Content -->
+          <div>
+            <h3 class="quicksand-1 text-2xl md:text-3xl font-bold text-gray-800 mb-2">Upload New Memory Recall</h3>
+            <p class="nunito-sans-1 text-[#9CA3AA]">Add a new memory recall to your collection</p>
+          </div>
+        </div>
+
+        <!-- Arrow Icon -->
+        <svg class="w-8 h-8 text-[#9CA3AA] group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Empty State Message (when no recalls exist) -->
+    <div *ngIf="memoryRecalls.length === 0" class="text-center py-12">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <div class="w-24 h-24 rounded-full bg-[#9CA3AA] flex items-center justify-center mx-auto mb-4">
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h3 class="quicksand-1 text-2xl font-bold text-gray-800 mb-2">No Memory Recalls Yet</h3>
+        <p class="nunito-sans-1 text-[#9CA3AA]">Upload your first memory recall to get started!</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

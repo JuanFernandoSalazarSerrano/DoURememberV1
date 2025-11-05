@@ -14,6 +14,8 @@ import { PatientEditProfile } from './components/patient-edit-profile/patient-ed
 import { DoctorPovPatientStatistics } from './components/doctor-pov-patient-statistics/doctor-pov-patient-statistics';
 import { Auth } from './components/auth/auth';
 import { authGuard } from './guards/auth-guard';
+import { UploadMemoryRecall } from './components/upload-memory-recall/upload-memory-recall';
+import { ListOfMemoryRecalls } from './components/list-of-memory-recalls/list-of-memory-recalls';
 
 export const routes: Routes = [
     {
@@ -22,7 +24,7 @@ export const routes: Routes = [
     redirectTo: '/home'
   },
   {
-    path: 'tests/memoryrecall/1', // 1 is user
+    path: 'tests/memoryrecall/:id', // 1 is user
     component: MemoryRecall
   },
   {
@@ -30,7 +32,7 @@ export const routes: Routes = [
     component: HomePage
   },
   {
-    path: 'tests/groundtruth',
+    path: 'tests/groundtruth/1',
     component: MemoryRecallChat
   },
   {
@@ -63,11 +65,11 @@ export const routes: Routes = [
     component: LineMatchingGame
   },
   {
-    path: 'patient/1', // 1 is patient id
+    path: 'patient/:id', // 1 is patient id
     component: PatientHome
   },
   {
-    path: 'patient/tests', // 1 is patient id
+    path: 'patient/tests/alltests', // 1 is patient id
     component: PatientTests
   },
     {
@@ -77,5 +79,13 @@ export const routes: Routes = [
   {
     path: 'login', // 1 is patient id
     component: Auth
+  },
+    {
+    path: 'patient/1/uploadMemory', // 1 is patient id
+    component: UploadMemoryRecall
+  },
+  {
+    path: 'patient/1/listOfMemoryRecalls', // 1 is patient id
+    component: ListOfMemoryRecalls
   },
 ];

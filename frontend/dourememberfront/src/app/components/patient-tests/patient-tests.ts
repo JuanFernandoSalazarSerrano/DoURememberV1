@@ -1,3 +1,4 @@
+import { PatientsService } from './../../services/patientsService';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -8,5 +9,11 @@ import { RouterModule } from '@angular/router';
   templateUrl: './patient-tests.html'
 })
 export class PatientTests {
+
+  userId!: number | null;
+
+  constructor(private readonly PatientsService: PatientsService){
+    this.userId = this.PatientsService.getUserId()
+  }
 
 }

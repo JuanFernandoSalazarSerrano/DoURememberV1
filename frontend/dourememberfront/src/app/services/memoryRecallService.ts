@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs';
 import { MemoryRecallModel } from '../models/MemoryRecallModel';
-import { memoryRecalls } from '../data/memoryrecall.data';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,11 @@ import { memoryRecalls } from '../data/memoryrecall.data';
 
 export class MemoryRecallService{
 
-  findAll(): Observable<MemoryRecallModel[]> {
-    return of(memoryRecalls);
+    private readonly url: string = 'http://localhost:8080/api/v1/users'
+    constructor(private readonly http: HttpClient){}
+
+    getAllUserMemoryRecalls(id: number): Observable<any>{
+    return this.http.get<any>(`${this.url}/getAllUserMemoryRecalls/${id}`)
   }
+
 }

@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
 import { MessageBubble } from '../message-bubble/message-bubble';
 import { FormsModule } from '@angular/forms';
@@ -29,21 +29,30 @@ export class MemoryRecallChat {
   userMessageHistory: (string | MemoryRecallModel)[] = [];
 
   constructor(
+    private readonly serviceMemoryRecalls: MemoryRecallService,
     private readonly router: Router,
     private readonly service: GroundTruthService,
     private readonly memoryRecallService: MemoryRecallService,
     private readonly sseClient: SseClient,
     private readonly ngZone: NgZone,
-    private readonly cdr: ChangeDetectorRef){
+    private readonly cdr: ChangeDetectorRef,
+    private readonly route: ActivatedRoute){
 
     if (this.router.currentNavigation()?.extras.state) {
       this.memoryRecall = this.router.currentNavigation()?.extras.state!['memoryRecall'];
       this.userMessageHistory = [this.memoryRecall];
     }
 
-    this.memoryRecallService.findAll().subscribe(memoryRecalls => {
-        this.memoryRecallsInThisSession = memoryRecalls;
-    });
+    this.route.paramMap.subscribe(params => {
+
+      const user_id = +(params.get('id') || 3);
+
+          this.serviceMemoryRecalls.getAllUserMemoryRecalls(user_id).subscribe(memoryRecallsOfuser => {
+            this.memoryRecallsInThisSession = memoryRecallsOfuser;
+            })
+
+  }
+)
 
     // const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
 
@@ -81,7 +90,7 @@ export class MemoryRecallChat {
 
   nextMemoryRecall(){
 
-    this.findAndDeleteMemoryRecall(this.memoryRecall.MemoryRecallId)
+    this.findAndDeleteMemoryRecall(this.memoryRecall.memoryrecallid)
 
     if (this.memoryRecallsInThisSession.length !== 0) {
       const randomNumber = Math.floor(Math.random() * this.memoryRecallsInThisSession.length);
@@ -129,7 +138,7 @@ export class MemoryRecallChat {
 
   findAndDeleteMemoryRecall(memoryRecallId: number) {
     this.memoryRecallsInThisSession = this.memoryRecallsInThisSession.filter(
-      memoryRecall => memoryRecall.MemoryRecallId !== memoryRecallId
+      memoryRecall => memoryRecall.memoryrecallid !== memoryRecallId
     );
   }
 }

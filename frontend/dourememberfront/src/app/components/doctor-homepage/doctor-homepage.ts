@@ -15,14 +15,14 @@ export class DoctorHomepage {
 
   doctor!: string;
 
-  constructor(private readonly patientsService: PatientsService){
-    this.patientsService.findAll().subscribe(allPatients => {
-      this.patients.set(allPatients)
-    })
+  // constructor(private readonly patientsService: PatientsService){
+  //   this.patientsService.findAll().subscribe(allPatients => {
+  //     this.patients.set(allPatients)
+  //   })
 
-    // TODO doctor name from role in db extract it from the patients (its bad ik)
+  //   // TODO doctor name from role in db extract it from the patients (its bad ik)
 
-    this.doctor = 'Rafel'
-  }
+  //   this.doctor = 'Rafel'
+  // }
 
 }

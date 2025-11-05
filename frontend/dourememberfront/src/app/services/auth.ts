@@ -7,12 +7,58 @@ import { Observable } from 'rxjs';
 })
 export class Auth {
 
-  private url: string = "http://localhost:4200/login"
+  private url: string = "http://localhost:8080/login"
+  private _token: string | undefined;
+
+  private _user: any = {
+    isAuth: false,
+    isAdmin: false,
+    user: undefined
+  };
+
 
   constructor(private http: HttpClient){}
 
-  loginUser({username, password}: any): Observable<any>{
-    return this.http.post<any>(this.url, {username, password})
+
+  get token(): string | undefined {
+    if(this._token != undefined){return this._token}
+    else if(sessionStorage.getItem('token') != null)
+      {this._token = sessionStorage.getItem('token') || ''
+      return this._token;
+      } // !!
+      return this._token;
   }
+
+  set token(token: string) {
+    this._token = token;
+    sessionStorage.setItem('token', token)
+
+  }
+
+  get user(): any {
+
+    if(this._user.isAuth)
+      {return this._user}
+    else if(sessionStorage.getItem('login') != null)
+      {this._user = JSON.parse(sessionStorage.getItem('login') || '{}')
+      return this._user;
+      } // !!
+      return this._user;
+  }
+
+  set user(user: any) {
+    this._user = user;
+    sessionStorage.setItem('login', JSON.stringify(user))
+  }
+
+  getpayload(token: string){
+    if(token != null){
+      JSON.parse(atob(token.split(".")[1]))
+    }
+    return this._user
+  }
+
+  loginUser({username, password}: any): Observable<any>{
+    return this.http.post<any>(this.url, {username, password})}
 
 }
