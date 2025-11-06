@@ -12,16 +12,14 @@
       </div>
 
       <div class="hidden md:flex md:items-center md:space-x-8">
-        <a href="#" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
+        <a [routerLink]="[`/patient/${userId}`]" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
           Home
         </a>
-        <a href="#" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
-          Appointments
-        </a>
-        <a href="#" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
+
+        <a [routerLink]="[`douremember/services`]" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
           Services
         </a>
-        <a href="#" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
+        <a [routerLink]="[`douremember/about`]" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
           About
         </a>
       </div>
@@ -52,7 +50,7 @@
 
   <div class="md:hidden hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">
-      <a [routerLink]="['']" href="#" class="block px-3 py-2 text-base font-medium nunito-sans-1 text-[#4F7380] hover:text-[#F5821F] hover:bg-gray-50 rounded-md transition-colors duration-200">
+      <a class="block px-3 py-2 text-base font-medium nunito-sans-1 text-[#4F7380] hover:text-[#F5821F] hover:bg-gray-50 rounded-md transition-colors duration-200">
         Home
       </a>
       <a href="#" class="block px-3 py-2 text-base font-medium nunito-sans-1 text-[#4F7380] hover:text-[#F5821F] hover:bg-gray-50 rounded-md transition-colors duration-200">

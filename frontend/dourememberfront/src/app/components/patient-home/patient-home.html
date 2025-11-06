@@ -124,8 +124,8 @@
 
         <!-- Start Test Button -->
         <!-- Removed gradient backgrounds and hover effects, using solid colors -->
-        <div class="group relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer flex-1 flex items-center border-2 border-transparent hover:border-[#F5821F]">
-          <div [routerLink]="['/patient/tests/alltests']" class="relative flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+        <div [routerLink]="['/patient/tests/alltests']" class="group relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer flex-1 flex items-center border-2 border-transparent hover:border-[#F5821F]">
+          <div class="relative flex flex-col md:flex-row items-center justify-between gap-6 w-full">
             <div class="flex items-center gap-6">
               <!-- Removed gradient background, using solid orange -->
               <div class="w-20 h-20 rounded-2xl bg-[#F5821F] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -148,7 +148,7 @@
 
         <!-- Added new Upload Memory Recall button -->
         <div class="group relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer flex-1 flex items-center border-2 border-transparent hover:border-[#9CA3AA]">
-          <div [routerLink]="['/patient/1/listOfMemoryRecalls']" class="relative flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+          <div [routerLink]="[`/tests/memoryrecall/${userId}`]" class="relative flex flex-col md:flex-row items-center justify-between gap-6 w-full">
             <div class="flex items-center gap-6">
               <div class="w-20 h-20 rounded-2xl bg-[#9CA3AA] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

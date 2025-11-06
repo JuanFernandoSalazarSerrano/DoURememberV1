@@ -49,10 +49,10 @@
 
       <!-- Title Text -->
       <h1 class="quicksand-1 text-5xl font-bold">
-        <span class="text-[#4F7380]">Memory</span><span class="text-[#F5821F]"> Assessment</span>
+        <span class="text-[#4F7380]">Memory</span><span class="text-[#F5821F]"> Recall</span>
       </h1>
     </div>
-    <p class="nunito-sans-1 text-[#9CA3AA] text-lg font-medium">Configure your memory evaluation parameters</p>
+    <p class="nunito-sans-1 text-[#9CA3AA] text-lg font-medium">Configure your memory recall parameters</p>
   </div>
 
   <!-- Form Card -->
@@ -60,8 +60,7 @@
     <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#F5821F]"></div>
 
     <!-- Form -->
-    <form class="space-y-8">
-
+  <form class="space-y-8" (ngSubmit)="onSubmit()" #memoryForm="ngForm">
       <!-- Image URL Section -->
       <div class="pb-6 border-b-2 border-[#9CA3AA]/20">
         <h2 class="quicksand-1 text-2xl font-bold text-[#4F7380] mb-6 flex items-center gap-3">
@@ -83,7 +82,10 @@
             <input
               type="url"
               placeholder="https://example.com/image.jpg"
-              class="nunito-sans-1 w-full pl-12 pr-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA]"
+              [(ngModel)]="memoryRecall.memoryrecallurl"
+              name="imageUrl"
+              required
+              class="nunito-sans-1 w-full pl-12 pr-4 py-4 ..."
             />
           </div>
         </div>
@@ -104,11 +106,13 @@
             <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
               Ground Truth
             </label>
-            <textarea
-              rows="4"
-              placeholder="Enter the complete ground truth description..."
-              class="nunito-sans-1 w-full px-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA] resize-none"
-            ></textarea>
+        <textarea
+          rows="4"
+          [(ngModel)]="memoryRecall.groundtruthdescriptionsmall"
+          name="groundTruth"
+          required
+          class="nunito-sans-1 w-full px-4 py-4 ..."
+        ></textarea>
           </div>
 
           <!-- Ground Truth Facts -->
@@ -116,11 +120,12 @@
             <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
               Ground Truth Facts
             </label>
-            <textarea
-              rows="4"
-              placeholder="List key facts from the ground truth (one per line)..."
-              class="nunito-sans-1 w-full px-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA] resize-none"
-            ></textarea>
+        <textarea
+          rows="4"
+          [(ngModel)]="memoryRecall.groundtruthfacts"
+          name="groundTruthFacts"
+          class="nunito-sans-1 w-full px-4 py-4 ..."
+        ></textarea>
           </div>
 
           <!-- Key Entities -->
@@ -130,112 +135,15 @@
             </label>
             <textarea
               rows="3"
-              placeholder="Enter key entities (people, places, objects, etc.)..."
-              class="nunito-sans-1 w-full px-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA] resize-none"
+              [(ngModel)]="memoryRecall.keyentities"
+              name="keyentities"
+              class="nunito-sans-1 w-full px-4 py-4 ..."
             ></textarea>
           </div>
         </div>
       </div>
 
-      <!-- Scoring Weights Section -->
-      <div class="pb-6 border-b-2 border-[#9CA3AA]/20">
-        <h2 class="quicksand-1 text-2xl font-bold text-[#4F7380] mb-6 flex items-center gap-3">
-          <svg class="w-7 h-7 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-          Scoring Weights
-        </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Presence Weight -->
-          <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
-              Presence Weight
-            </label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-6 h-6 text-[#4F7380]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                max="1"
-                placeholder="0.0 - 1.0"
-                class="nunito-sans-1 w-full pl-12 pr-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA]"
-              />
-            </div>
-          </div>
-
-          <!-- Accuracy Weight -->
-          <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
-              Accuracy Weight
-            </label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-6 h-6 text-[#4F7380]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                max="1"
-                placeholder="0.0 - 1.0"
-                class="nunito-sans-1 w-full pl-12 pr-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA]"
-              />
-            </div>
-          </div>
-
-          <!-- Omission Weight -->
-          <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
-              Omission Weight
-            </label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-6 h-6 text-[#4F7380]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                </svg>
-              </div>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                max="1"
-                placeholder="0.0 - 1.0"
-                class="nunito-sans-1 w-full pl-12 pr-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA]"
-              />
-            </div>
-          </div>
-
-          <!-- Commission Weight -->
-          <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
-              Commission Weight
-            </label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-6 h-6 text-[#4F7380]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-              </div>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                max="1"
-                placeholder="0.0 - 1.0"
-                class="nunito-sans-1 w-full pl-12 pr-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA]"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- User Answer Section -->
       <div>
@@ -250,11 +158,13 @@
           <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
             User Answer
           </label>
-          <textarea
-            rows="6"
-            placeholder="Enter the user's response to be evaluated..."
-            class="nunito-sans-1 w-full px-4 py-4 text-base bg-white border-2 border-[#9CA3AA] rounded-xl focus:border-[#4F7380] focus:ring-2 focus:ring-[#4F7380]/20 transition-all duration-300 font-medium text-[#4F7380] placeholder:text-[#9CA3AA] resize-none"
-          ></textarea>
+            <textarea
+              rows="6"
+              [(ngModel)]="memoryRecall.groundtruthdescriptioncomplete"
+              name="userAnswer"
+              required
+              class="nunito-sans-1 w-full px-4 py-4 ..."
+            ></textarea>
         </div>
       </div>
 

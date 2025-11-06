@@ -15,7 +15,8 @@ import { DoctorPovPatientStatistics } from './components/doctor-pov-patient-stat
 import { Auth } from './components/auth/auth';
 import { authGuard } from './guards/auth-guard';
 import { UploadMemoryRecall } from './components/upload-memory-recall/upload-memory-recall';
-import { ListOfMemoryRecalls } from './components/list-of-memory-recalls/list-of-memory-recalls';
+import { DourememberServices } from './components/douremember-services/douremember-services';
+import { DourememberAbout } from './components/douremember-about/douremember-about';
 
 export const routes: Routes = [
     {
@@ -32,7 +33,7 @@ export const routes: Routes = [
     component: HomePage
   },
   {
-    path: 'tests/groundtruth/1',
+    path: 'tests/groundtruth/:id',
     component: MemoryRecallChat
   },
   {
@@ -81,11 +82,15 @@ export const routes: Routes = [
     component: Auth
   },
     {
-    path: 'patient/1/uploadMemory', // 1 is patient id
+    path: 'patient/:id/uploadMemory', // 1 is patient id
     component: UploadMemoryRecall
   },
   {
-    path: 'patient/1/listOfMemoryRecalls', // 1 is patient id
-    component: ListOfMemoryRecalls
+    path: 'douremember/services', // 1 is patient id
+    component: DourememberServices
+  },
+  {
+    path: 'douremember/about', // 1 is patient id
+    component: DourememberAbout
   },
 ];

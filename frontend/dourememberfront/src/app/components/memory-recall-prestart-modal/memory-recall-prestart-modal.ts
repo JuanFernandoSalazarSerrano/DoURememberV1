@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
 import { CommonModule } from '@angular/common';
+import { PatientsService } from './../../services/patientsService';
 import { RouterModule } from '@angular/router';
 
 
@@ -13,7 +14,13 @@ export class MemoryRecallPrestartModal {
 
   @Input() memoryRecall!: MemoryRecallModel;
 
+  userId!: number | null;
+
   openInvite: boolean = false;
+
+  constructor(private readonly PatientsService: PatientsService){
+    this.userId = this.PatientsService.getUserId()
+  }
 
   @Output() closeModalEventEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   closeMemoryRecallModal(){
@@ -24,4 +31,6 @@ export class MemoryRecallPrestartModal {
   openInviteMemoryRecall(){
     this.openModalEventEmitter.emit()
   }
+
+
 }

@@ -1,6 +1,14 @@
-<div class="min-h-screen bg-gray-50">
 <div class="bg-white border-b border-gray-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div [routerLink]="[`/patient/tests/alltests`]" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Added go back button with matching style -->
+    <button class="group mb-4 flex items-center gap-2 text-[#4F7380] hover:text-[#F5821F] transition-colors duration-300 font-['Lexend_Deca'] font-semibold">
+      <!-- Left Arrow Icon -->
+      <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      <span class="text-lg">Go Back</span>
+    </button>
+
     <h1 class="text-3xl font-bold text-[#4F7380] font-['Lexend_Deca']">
         Memory Recalls
     </h1>
@@ -18,4 +26,54 @@
   ></test-memory-recall>
 }
 </div>
+
+<div class="max-w-4xl mx-auto mt-10">
+    <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 hover:shadow-2xl transition-shadow duration-300">
+      <!-- Text Content -->
+      <div class="flex-1 text-center md:text-left">
+        <h3 class="text-2xl font-bold text-[#4F7380] mb-2 lexend-deca-1">
+          Share Your Journey
+        </h3>
+        <p class="text-[#9CA3AA] nunito-sans-1">
+          Help us improve by uploading your experiences and memories
+        </p>
+      </div>
+
+      <!-- Upload Button with Amusing Icon -->
+      <button [routerLink]="[`/patient/${userId}/uploadMemory`]" class="group relative bg-gradient-to-r from-[#F5821F] to-[#FF9A3C] text-white px-8 py-4 rounded-full font-semibold hover:from-[#E67310] hover:to-[#F5821F] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-3 quicksand-1">
+        <!-- Amusing Brain with Upload Arrow SVG Icon -->
+        <svg class="w-8 h-8 group-hover:animate-bounce" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Brain Shape -->
+          <path d="M32 8C24 8 18 14 18 22C18 24 18.5 25.8 19.3 27.4C17.3 28.8 16 31.2 16 34C16 37.5 18.2 40.5 21.3 41.6C21.1 42.4 21 43.2 21 44C21 48.4 24.6 52 29 52H35C39.4 52 43 48.4 43 44C43 43.2 42.9 42.4 42.7 41.6C45.8 40.5 48 37.5 48 34C48 31.2 46.7 28.8 44.7 27.4C45.5 25.8 46 24 46 22C46 14 40 8 32 8Z" fill="white" opacity="0.9"/>
+
+          <!-- Brain Details (squiggly lines) -->
+          <path d="M26 18C26 18 28 20 28 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <path d="M32 16C32 16 34 18 34 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <path d="M38 18C38 18 36 20 36 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <path d="M24 28C24 28 26 30 28 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <path d="M40 28C40 28 38 30 36 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+          <!-- Upload Arrow -->
+          <g class="group-hover:-translate-y-1 transition-transform duration-300">
+            <path d="M32 38V26" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M28 30L32 26L36 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <!-- Sparkles for fun -->
+          <circle cx="22" cy="24" r="1.5" fill="currentColor" opacity="0.8" class="group-hover:animate-pulse"/>
+          <circle cx="42" cy="24" r="1.5" fill="currentColor" opacity="0.8" class="group-hover:animate-pulse" style="animation-delay: 0.2s"/>
+          <circle cx="32" cy="42" r="1.5" fill="currentColor" opacity="0.8" class="group-hover:animate-pulse" style="animation-delay: 0.4s"/>
+        </svg>
+
+        <span class="text-lg">Upload new memory</span>
+
+        <!-- Decorative pulse effect -->
+        <span class="absolute inset-0 rounded-full bg-[#F5821F] opacity-0 group-hover:opacity-20 group-hover:animate-ping"></span>
+      </button>
+    </div>
+  </div>
+
 </div>
+
+
+

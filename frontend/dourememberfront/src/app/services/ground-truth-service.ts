@@ -7,7 +7,7 @@ import { Observable} from 'rxjs';
 })
 export class GroundTruthService {
 
-  private readonly url: string = 'http://localhost:8080/api/v1/groundtruth/sendUserAnswer'
+  private readonly url: string = 'http://localhost:8081/api/v1/groundtruth/sendUserAnswer'
 
   constructor(private readonly http: HttpClient){}
 

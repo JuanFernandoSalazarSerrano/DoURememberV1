@@ -1,146 +1,164 @@
-import { Component} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MemoryRecallModel } from '../../models/MemoryRecallModel';
-import { MessageBubble } from '../message-bubble/message-bubble';
-import { FormsModule } from '@angular/forms';
-import { GroundTruthService } from '../../services/ground-truth-service';
-import { SseClient } from 'ngx-sse-client';
-import { NgZone } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
-import { MemoryRecallService } from '../../services/memoryRecallService';
-import { MemoryRecallInChat } from '../memory-recall-in-chat/memory-recall-in-chat';
-import { RouterModule } from '@angular/router';
-
+import { Component, signal } from "@angular/core"
+import  { ActivatedRoute, Router } from "@angular/router"
+import  { MemoryRecallModel } from "../../models/MemoryRecallModel"
+import { MessageBubble } from "../message-bubble/message-bubble"
+import { FormsModule } from "@angular/forms"
+import  { GroundTruthService } from "../../services/ground-truth-service"
+import  { SseClient } from "ngx-sse-client"
+import  { NgZone } from "@angular/core"
+import  { ChangeDetectorRef } from "@angular/core"
+import  { MemoryRecallService } from "../../services/memoryRecallService"
+import { MemoryRecallInChat } from "../memory-recall-in-chat/memory-recall-in-chat"
+import { RouterModule } from "@angular/router"
+import { ViewChild, type ElementRef, type AfterViewChecked } from "@angular/core"
+import { HttpHeaders } from "@angular/common/http"
+import { GroundTruthResponse } from "../../models/GroundTruthResponse"
 
 @Component({
-  selector: 'app-memory-recall-chat',
+  selector: "app-memory-recall-chat",
   imports: [MessageBubble, FormsModule, MemoryRecallInChat, RouterModule],
-  templateUrl: './memory-recall-chat.html'
+  templateUrl: "./memory-recall-chat.html",
 })
+export class MemoryRecallChat implements AfterViewChecked {
+  @ViewChild("messagesContainer") private messagesContainer!: ElementRef
+  private shouldScrollToBottom = false
 
-export class MemoryRecallChat {
+  memoryRecallsInThisSession = signal<MemoryRecallModel[]>([])
 
-  memoryRecallsInThisSession!: MemoryRecallModel[];
+  memoryRecall!: MemoryRecallModel
 
-  memoryRecall!: MemoryRecallModel;
+  userMessage = ""
 
-  userMessage: string = ''
-
-  userMessageHistory: (string | MemoryRecallModel)[] = [];
+  userMessageHistory = signal<(string | MemoryRecallModel)[]>([])
 
   constructor(
     private readonly serviceMemoryRecalls: MemoryRecallService,
     private readonly router: Router,
     private readonly service: GroundTruthService,
-    private readonly memoryRecallService: MemoryRecallService,
     private readonly sseClient: SseClient,
-    private readonly ngZone: NgZone,
-    private readonly cdr: ChangeDetectorRef,
-    private readonly route: ActivatedRoute){
+    private readonly route: ActivatedRoute,
+  )
+  {
 
     if (this.router.currentNavigation()?.extras.state) {
-      this.memoryRecall = this.router.currentNavigation()?.extras.state!['memoryRecall'];
-      this.userMessageHistory = [this.memoryRecall];
+      this.memoryRecall = this.router.currentNavigation()?.extras.state!["memoryRecall"]
+      this.userMessageHistory.set([this.memoryRecall])
+
     }
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
+      const user_id = +(params.get("id") || 3)
 
-      const user_id = +(params.get('id') || 3);
+      this.serviceMemoryRecalls.getAllUserMemoryRecalls(user_id).subscribe((memoryRecallsOfuser) => {
+        this.memoryRecallsInThisSession.set(memoryRecallsOfuser)
+      })
+    })
 
-          this.serviceMemoryRecalls.getAllUserMemoryRecalls(user_id).subscribe(memoryRecallsOfuser => {
-            this.memoryRecallsInThisSession = memoryRecallsOfuser;
-            })
+    const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
+    this.sseClient.stream('http://localhost:8081/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
+      console.log(1, 'Received event from SSE stream');
 
+      if (event.type === 'error') {
+        const errorEvent = event as ErrorEvent;
+        console.error(2, 'Error event from SSE stream', errorEvent.error, errorEvent.message);
+      } else {
+        const messageEvent = event as MessageEvent;
+        try {
+          console.log(3, 'Trying to parse SSE data', messageEvent.data);
+          const payload = typeof messageEvent.data === 'string'
+            ? JSON.parse(messageEvent.data)
+            : messageEvent.data;
+
+          // console.log(4, 'Parsed SSE data', payload);
+          // const cleanedResponse = payload.aiResponse.replace(/^"|"$|\\(?!u)/g, '');
+          // console.log(5, 'Cleaned aiResponse from SSE data', cleanedResponse);
+          // const parsedJson = JSON.parse(cleanedResponse);
+          // const response = parsedJson as GroundTruthResponse;
+
+          console.log(6, 'Parsed JSON from SSE data', payload.aiResponse);
+          if (payload && payload.aiResponse !== undefined && payload.aiResponse !== null) {
+            console.log(7, 'Adding aiResponse to userMessageHistory', payload.aiResponse);
+            this.userMessageHistory.set([...this.userMessageHistory(), payload.aiResponse]);
+          } else {
+            console.warn(8, 'SSE payload missing aiResponse', payload);
+          }
+        } catch (err) {
+          console.error(9, 'Failed to parse SSE data', messageEvent.data, err);
+        }
+      }
+    });
   }
-)
 
-    // const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
+  ngAfterViewChecked() {
+    if (this.shouldScrollToBottom) {
+      this.scrollToBottom()
+      this.shouldScrollToBottom = false
+    }
+  }
 
-    // this.sseClient.stream('http://localhost:8080/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
-    //   if (event.type === 'error') {
-    //     const errorEvent = event as ErrorEvent;
-    //     console.error(errorEvent.error, errorEvent.message);
-    //   } else {
-    //     const messageEvent = event as MessageEvent;
-    //     try {
-    //       const payload = typeof messageEvent.data === 'string'
-    //         ? JSON.parse(messageEvent.data)
-    //         : messageEvent.data;
+  private scrollToBottom(): void {
+    try {
+      if (this.messagesContainer) {
+        this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight
+      }
+    } catch (err) {
+      console.error("Scroll to bottom failed:", err)
+    }
+  }
 
-    //       const cleanedResponse = payload.aiResponse.replace(/^"|"$|\\(?!u)/g, '');
-    //       const parsedJson = JSON.parse(cleanedResponse);
-    //       const response = parsedJson as GroundTruthResponse;
-
-    //       if (response && response.aiResponse !== undefined && response.aiResponse !== null) {
-    //         // run inside Angular zone so change detection notices the update
-    //         this.ngZone.run(() => {
-    //           this.userMessageHistory = [...this.userMessageHistory, response.aiResponse];
-    //           // force detection (use detectChanges if immediate update needed)
-    //           this.cdr.markForCheck();
-    //         });
-    //       } else {
-    //         console.warn('SSE payload missing aiResponse', payload);
-    //       }
-    //     } catch (err) {
-    //       console.error('Failed to parse SSE data', messageEvent.data, err);
-    //     }
-    //   }
-    // });
-   }
-
-  nextMemoryRecall(){
+  nextMemoryRecall() {
+    this.userMessage = ""
 
     this.findAndDeleteMemoryRecall(this.memoryRecall.memoryrecallid)
 
-    if (this.memoryRecallsInThisSession.length !== 0) {
-      const randomNumber = Math.floor(Math.random() * this.memoryRecallsInThisSession.length);
-      this.memoryRecall = this.memoryRecallsInThisSession[randomNumber];
-      this.userMessageHistory = [...this.userMessageHistory, this.memoryRecall];
+    if (this.memoryRecallsInThisSession().length !== 0) {
+      const randomNumber = Math.floor(Math.random() * this.memoryRecallsInThisSession().length)
+      this.memoryRecall = this.memoryRecallsInThisSession()[randomNumber]
+      this.userMessageHistory.set([...this.userMessageHistory(), this.memoryRecall])
+      this.shouldScrollToBottom = true
     }
-
   }
 
+  sendMessage(userAnswer: string) {
 
-  sendMessage(userAnswer: string){
+    this.userMessageHistory().push(userAnswer)
 
-    this.userMessageHistory.push(userAnswer, 'AI RESPONSE, NOT REAL FOR TESTING POURPUSES')
+    this.shouldScrollToBottom = true
 
-    this.userMessage = ''
+    // this.nextMemoryRecall()
 
-    this.nextMemoryRecall()
+    this.service.sendUserAnswerToAiGroundTruthTest(
 
+      `{
+      "groundTruth": ${JSON.stringify(this.memoryRecall.groundtruthdescriptioncomplete)},
+      "groundTruthFacts": ${JSON.stringify(this.memoryRecall.groundtruthfacts)},
+      "keyEntities": ${JSON.stringify(this.memoryRecall.keyentities)},
+      "userAnswer": ${JSON.stringify(userAnswer.replaceAll('\n', ''))},
+      "matchingTolerances": {
+        "synonymAllowance": true,
+        "fuzzyStringThreshold": 0.75,
+        "numericTolerancePercent": 10
+      },
+      "scoringWeights": {
+        "presence": 0.4,
+        "accuracy": 0.35,
+        "omission": 0.15,
+        "commission": 0.10
+      }
+      }`
 
-    // this.service.sendUserAnswerToAiGroundTruthTest(
-
-    //   `{
-    //   "groundTruth": ${JSON.stringify(this.memoryRecall.groundTruthDescriptionComplete)},
-    //   "groundTruthFacts": ${JSON.stringify(this.memoryRecall.groundTruthFacts)},
-    //   "keyEntities": ${JSON.stringify(this.memoryRecall.keyEntities)},
-    //   "userAnswer": ${JSON.stringify(userAnswer.replaceAll('\n', ''))},
-    //   "matchingTolerances": {
-    //     "synonymAllowance": true,
-    //     "fuzzyStringThreshold": 0.75,
-    //     "numericTolerancePercent": 10
-    //   },
-    //   "scoringWeights": {
-    //     "presence": 0.4,
-    //     "accuracy": 0.35,
-    //     "omission": 0.15,
-    //     "commission": 0.10
-    //   }
-    //   }`
-
-    // ).subscribe(() => {
-    //   this.nextMemoryRecall()
-    //  }
-    // )
+    ).subscribe((a) => {
+      console.log(a)
+      // this.nextMemoryRecall()
+     }
+    )
   }
 
   findAndDeleteMemoryRecall(memoryRecallId: number) {
-    this.memoryRecallsInThisSession = this.memoryRecallsInThisSession.filter(
-      memoryRecall => memoryRecall.memoryrecallid !== memoryRecallId
-    );
+    this.userMessage = ""
+
+    this.memoryRecallsInThisSession.set(
+      this.memoryRecallsInThisSession().filter((memoryRecall) => memoryRecall.memoryrecallid !== memoryRecallId),
+    )
   }
 }
-
-
