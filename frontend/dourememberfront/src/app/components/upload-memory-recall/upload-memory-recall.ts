@@ -1,8 +1,9 @@
 import { MemoryRecallService } from './../../services/memoryRecallService';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { PatientsService } from './../../services/patientsService';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'upload-memory-recall',
@@ -18,13 +19,12 @@ export class UploadMemoryRecall {
 
     memoryRecall = new MemoryRecallModel();
 
-  constructor(private readonly memoryRecallService: MemoryRecallService, private readonly PatientsService: PatientsService){
+  constructor(private readonly memoryRecallService: MemoryRecallService, private readonly PatientsService: PatientsService, private router: Router){
     this.userId = this.PatientsService.getUserId()
     this.memoryRecall.user.id = this.userId
 }
 
-  onSubmit(): void {
-
+  async onSubmit(): Promise<void> {
 
     const {memoryrecallid, ...memoryRecallwithoutId} = this.memoryRecall
 
@@ -35,5 +35,8 @@ export class UploadMemoryRecall {
       });
 
     console.log(this.memoryRecall);
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+    this.router.navigate([`/tests/memoryrecall/${this.userId}`]);
   }
 }

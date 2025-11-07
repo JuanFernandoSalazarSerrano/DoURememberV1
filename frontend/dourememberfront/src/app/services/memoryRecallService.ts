@@ -1,9 +1,7 @@
 import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs';
 import { MemoryRecallModel } from '../models/MemoryRecallModel';
 import { HttpClient } from '@angular/common/http';
-import { MemoryRecall } from '../components/memory-recall/memory-recall';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +19,9 @@ export class MemoryRecallService{
     createMemoryRecall(memory: MemoryRecallModel): Observable<MemoryRecallModel>{
     return this.http.post<MemoryRecallModel>(`${this.url}/createMemoryRecall`,memory);
   }
+
+    deleteMemoryRecall(memoryRecallId: number): Observable<any>{
+        return this.http.delete<any>(`${this.url}/deleteMemoryRecall/${memoryRecallId}`)
+    }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { SharingData } from './../../services/sharing-data-service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TestMemoryRecallCard } from '../test-memory-recall/test-memory-recall-card';
 import { MemoryRecallService } from '../../services/memoryRecallService';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
@@ -15,30 +16,52 @@ import { PatientsService } from './../../services/patientsService';
 
 export class MemoryRecall implements OnInit {
 
-memoryRecallsList = signal<MemoryRecallModel[]>([]);
+  memoryRecallsList = signal<MemoryRecallModel[]>([]);
 
-userId!: number | null;
+  userId!: number | null;
+
+  refreshComponent: boolean = false;
 
 
-  constructor(
-    private readonly PatientsService: PatientsService,
-    private readonly serviceMemoryRecalls: MemoryRecallService,
-    private readonly route: ActivatedRoute
-  ){this.userId = this.PatientsService.getUserId()}
+    constructor(
 
-  ngOnInit(): void {
+      private readonly PatientsService: PatientsService,
+      private readonly serviceMemoryRecalls: MemoryRecallService,
+      private readonly route: ActivatedRoute,
+      private readonly SharingData: SharingData
 
-    this.route.paramMap.subscribe(params => {
+    ){this.userId = this.PatientsService.getUserId()
+      this.refresh() //with this i subscribe to the observable and he keeps listening
+    }
 
-      const user_id = +(params.get('id') || 0);
+    ngOnInit(): void {
 
-      console.log(user_id)
+      this.route.paramMap.subscribe(params => {
 
-          this.serviceMemoryRecalls.getAllUserMemoryRecalls(user_id).subscribe(memoryRecallsOfuser => {
-            console.log(memoryRecallsOfuser, 'xd')
-            this.memoryRecallsList.set(memoryRecallsOfuser)
-            console.log(this.memoryRecallsList(), 'xd2')
+        const user_id = +(params.get('id') || 0);
+
+            this.serviceMemoryRecalls.getAllUserMemoryRecalls(user_id).subscribe(memoryRecallsOfuser => {
+              this.memoryRecallsList.set(memoryRecallsOfuser)
+
+              })
             })
-          })
-        }
-}
+          }
+
+
+    refresh(){
+      this.SharingData.CloseModalEventEmitter.subscribe(_ => {
+        this.listenForNewMemoryRecallsChanges()
+      })
+    }
+
+    listenForNewMemoryRecallsChanges(){
+          console.log(this.memoryRecallsList(), '1')
+
+      this.serviceMemoryRecalls.getAllUserMemoryRecalls(this.userId).subscribe(memoryRecallsOfuser => {
+              this.memoryRecallsList.set(memoryRecallsOfuser)
+          console.log(this.memoryRecallsList(), '3')
+
+              console.log('GUN')
+              })
+    }
+  }

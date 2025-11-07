@@ -79,6 +79,7 @@ export class MemoryRecallChat implements AfterViewChecked {
           if (payload && payload.aiResponse !== undefined && payload.aiResponse !== null) {
             console.log(7, 'Adding aiResponse to userMessageHistory', payload.aiResponse);
             this.userMessageHistory.set([...this.userMessageHistory(), payload.aiResponse]);
+            this.nextMemoryRecall()
           } else {
             console.warn(8, 'SSE payload missing aiResponse', payload);
           }
@@ -121,7 +122,11 @@ export class MemoryRecallChat implements AfterViewChecked {
 
   sendMessage(userAnswer: string) {
 
+    this.userMessage = ""
+
     this.userMessageHistory().push(userAnswer)
+
+
 
     this.shouldScrollToBottom = true
 
@@ -147,9 +152,7 @@ export class MemoryRecallChat implements AfterViewChecked {
       }
       }`
 
-    ).subscribe((a) => {
-      console.log(a)
-      // this.nextMemoryRecall()
+    ).subscribe(_ => {
      }
     )
   }

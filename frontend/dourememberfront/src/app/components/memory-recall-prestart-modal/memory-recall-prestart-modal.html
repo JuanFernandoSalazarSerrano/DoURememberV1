@@ -3,13 +3,20 @@
 
     <div class="border-b border-gray-200 p-6 flex items-center justify-between">
       <div class="flex items-center">
+          <!-- Added red trashcan icon at the top left -->
+          <button
+            (click)="deleteMemoryRecall()"
+            class="text-red-600 hover:text-red-700 transition-colors p-2 hover:bg-red-50 rounded-lg mr-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+          </button>
           <img class="w-10 h-10 mr-2" src="https://www.svgrepo.com/show/293916/brain.svg" alt="brain">
         <div class="flex items-baseline">
           <span class="text-2xl font-bold text-[#4F7380]" style="font-family: 'Nunito Sans', sans-serif;">DoU</span>
           <span class="text-2xl font-bold text-[#F5821F]" style="font-family: 'Nunito Sans', sans-serif;">Remember</span>
         </div>
       </div>
-
       <div class="flex items-center gap-4">
         <h2 class="text-xl font-semibold text-[#4F7380]" style="font-family: 'Lexend Deca', sans-serif;">
           Memory Recall: <span class="text-[#F5821F]">{{memoryRecall.memoryrecallid}}</span>
