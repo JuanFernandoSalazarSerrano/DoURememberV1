@@ -19,16 +19,19 @@
   <div class="max-w-7xl mx-auto relative z-10">
 
     <!-- Back Button -->
-    <button [routerLink]="['/patient/1']" class="mb-3 flex items-center gap-2 px-4 py-2 rounded-lg text-[#4F7380] hover:bg-white hover:shadow-md transition-all duration-300 group">
-      <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  <div [routerLink]="[`/patient/${userId}`]">
+    <button class="group mb-4 flex items-center gap-2 text-[#4F7380] hover:text-[#F5821F] transition-colors duration-300 font-['Lexend_Deca'] font-semibold">
+      <!-- Left Arrow Icon -->
+      <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
       </svg>
-      <span class="nunito-sans-1 font-semibold">Back to Home</span>
+      <span class="text-lg">Go Back</span>
     </button>
+    </div>
 
     <!-- Section Header -->
     <div class="text-center mb-8">
-      <h2 class="quicksand-1 text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+      <h2 class="font-['Lexend_Deca'] text-4xl md:text-5xl font-bold text-[#4F7380] mb-4">
         What test shall we try today?
       </h2>
       <p class="nunito-sans-1 text-gray-600 text-lg max-w-2xl mx-auto">

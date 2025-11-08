@@ -42,7 +42,7 @@ export const routes: Routes = [
     component: StatisticsSession
   },
     {
-    path: 'doctor/1/patients', // 1 is doctor id
+    path: 'doctor/:id/patients', // 1 is doctor id
     component: DoctorHomepage,
     canActivate: [authGuard]
   },

@@ -1,9 +1,9 @@
 import { SharingData } from './../../services/sharing-data-service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TestMemoryRecallCard } from '../test-memory-recall/test-memory-recall-card';
 import { MemoryRecallService } from '../../services/memoryRecallService';
 import { MemoryRecallModel } from '../../models/MemoryRecallModel';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { signal } from '@angular/core';
 import { PatientsService } from './../../services/patientsService';

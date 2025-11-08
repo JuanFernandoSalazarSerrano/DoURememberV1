@@ -37,8 +37,9 @@ export class Auth {
 
   get user(): any {
 
-    if(this._user.isAuth)
-      {return this._user}
+    if(this._user.isAuth){
+        return this._user}
+
     else if(sessionStorage.getItem('login') != null)
       {this._user = JSON.parse(sessionStorage.getItem('login') || '{}')
       return this._user;
@@ -53,7 +54,7 @@ export class Auth {
 
   getpayload(token: string){
     if(token != null){
-      JSON.parse(atob(token.split(".")[1]))
+      return JSON.parse(atob(token.split(".")[1]))
     }
     return this._user
   }

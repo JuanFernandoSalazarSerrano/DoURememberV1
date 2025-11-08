@@ -1,6 +1,6 @@
+import { RouterModule } from '@angular/router';
 import { PatientsService } from './../../services/patientsService';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 
 @Component({

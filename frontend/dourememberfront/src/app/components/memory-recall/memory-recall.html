@@ -18,16 +18,39 @@
   </div>
 </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-@for (Memory of memoryRecallsList(); track $index) {
-  <test-memory-recall
-    [TestMemoryRecall]="Memory"
-  ></test-memory-recall>
-}
-</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    @for (Memory of memoryRecallsList(); track $index) {
+      <test-memory-recall
+        [TestMemoryRecall]="Memory"
+      ></test-memory-recall>
+    }
+    @empty {
+      <!-- Enhanced empty state with better design matching DoURemember style -->
+      <div class="col-span-full flex items-center justify-center py-16">
+        <div class="text-center max-w-md mx-auto">
+          <!-- Icon with background -->
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#4F7380] to-[#6B9DAD] rounded-full mb-6 shadow-lg">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/>
+            </svg>
+          </div>
 
-<div class="max-w-4xl mx-auto mt-10">
+          <!-- Heading -->
+          <h2 class="text-3xl font-bold text-[#4F7380] mb-4 font-['Lexend_Deca']">
+            No Memories Yet
+          </h2>
+
+          <!-- Description -->
+          <p class="text-gray-600 text-lg quicksand-1 leading-relaxed">
+            Click the button below and let's start creating some memories! Your journey begins with a single moment.
+          </p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="max-w-4xl mx-auto mt-10">
     <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 hover:shadow-2xl transition-shadow duration-300">
       <!-- Text Content -->
       <div class="flex-1 text-center md:text-left">
@@ -73,4 +96,3 @@
     </div>
   </div>
 </div>
-

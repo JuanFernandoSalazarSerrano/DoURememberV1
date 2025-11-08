@@ -46,7 +46,7 @@ export class App {
 
   handlerLogin(){
     this.SharingData.handlerLoginEventEmitter.subscribe(({username, password}) =>
-      {console.log({username, password})
+      {
 
       this.authService.loginUser({username,password}).subscribe({
         next: response => {
@@ -62,7 +62,9 @@ export class App {
           // here i should change if it is doctor or if its patient using the jwt claims
 
           const userId = this.getUserId()
-          this.router.navigate([`/patient/${userId}`]);
+
+          if(login.isAdmin != true){this.router.navigate([`/patient/${userId}`]);}
+          else{this.router.navigate([`/doctor/${userId}/patients`]);}
 
 
         }, error: error => {if (error.status == 401){this.showLoginError()} else{throw error}}

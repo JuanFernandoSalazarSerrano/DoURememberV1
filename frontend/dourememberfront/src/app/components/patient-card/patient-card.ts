@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../models/User';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'patient-card',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './patient-card.html',
 })
 export class PatientCard {

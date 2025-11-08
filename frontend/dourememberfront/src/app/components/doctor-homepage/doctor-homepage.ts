@@ -14,10 +14,21 @@ export class DoctorHomepage {
 
   patients = signal<User[]>([]);
 
-  userId: number | null = 0
+  doctorInfo!: User;
+
+  userId: number | null = 0;
+
+  doctorName: string = 'Mr. Memory';
+
+  doctorImage: string | null = null;
 
   constructor(private readonly ServiceDoctors: ServiceDoctors, private readonly PatientsService: PatientsService){
     this.userId = this.PatientsService.getUserId();
+    this.PatientsService.getAllUserInformation(this.userId).subscribe(userInfo => {
+      this.doctorInfo = userInfo
+      this.doctorName = this.doctorInfo.name
+      this.doctorImage = this.doctorInfo.profilepicture
+    })
     this.getAllPatients()
   }
 

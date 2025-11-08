@@ -12,9 +12,19 @@
       </div>
 
       <div class="hidden md:flex md:items-center md:space-x-8">
+
+        @if (isAuth()) {
+
+        @if (getAdmin()) {
+        <a [routerLink]="[`/doctor/${userId}/patients`]" class="font-bold text-[#F5821F] hover:text-[#e0730d] hover:text-lg transition-all duration-200">
+          Doctor Dashboard
+        </a>
+        }
+        @else {
         <a [routerLink]="[`/patient/${userId}`]" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
           Home
-        </a>
+        </a>}
+        }
 
         <a [routerLink]="[`douremember/services`]" class="text-[#4F7380] hover:text-[#F5821F] px-3 py-2 text-sm font-medium nunito-sans-1 transition-colors duration-200">
           Services

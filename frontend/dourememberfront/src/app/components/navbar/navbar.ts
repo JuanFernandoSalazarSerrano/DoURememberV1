@@ -20,4 +20,9 @@ export class Navbar {
     return this.auth.isAdmin()
   }
 
+  isAuth(){
+    console.log(this.auth.authenticated())
+    return this.auth.authenticated()
+  }
+
 }
