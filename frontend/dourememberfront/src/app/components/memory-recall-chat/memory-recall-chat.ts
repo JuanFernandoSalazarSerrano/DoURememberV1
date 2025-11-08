@@ -5,14 +5,12 @@ import { MessageBubble } from "../message-bubble/message-bubble"
 import { FormsModule } from "@angular/forms"
 import  { GroundTruthService } from "../../services/ground-truth-service"
 import  { SseClient } from "ngx-sse-client"
-import  { NgZone } from "@angular/core"
-import  { ChangeDetectorRef } from "@angular/core"
 import  { MemoryRecallService } from "../../services/memoryRecallService"
 import { MemoryRecallInChat } from "../memory-recall-in-chat/memory-recall-in-chat"
 import { RouterModule } from "@angular/router"
 import { ViewChild, type ElementRef, type AfterViewChecked } from "@angular/core"
 import { HttpHeaders } from "@angular/common/http"
-import { GroundTruthResponse } from "../../models/GroundTruthResponse"
+import { Subscription } from "rxjs"
 
 @Component({
   selector: "app-memory-recall-chat",
@@ -28,6 +26,8 @@ export class MemoryRecallChat implements AfterViewChecked {
   memoryRecall!: MemoryRecallModel
 
   userMessage = ""
+
+  private sseSub?: Subscription;
 
   userMessageHistory = signal<(string | MemoryRecallModel)[]>([])
 
@@ -55,7 +55,7 @@ export class MemoryRecallChat implements AfterViewChecked {
     })
 
     const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
-    this.sseClient.stream('http://localhost:8081/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
+    this.sseSub = this.sseClient.stream('http://localhost:8080/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
       console.log(1, 'Received event from SSE stream');
 
       if (event.type === 'error') {
@@ -112,7 +112,14 @@ export class MemoryRecallChat implements AfterViewChecked {
       this.userMessageHistory.set([...this.userMessageHistory(), this.memoryRecall])
       this.shouldScrollToBottom = true
     }
+    else{
+      if(this.sseSub != undefined){
+      this.sseSub.unsubscribe();
+      this.sseSub = undefined;}
+    }
   }
+
+
 
   sendMessage(userAnswer: string) {
 
