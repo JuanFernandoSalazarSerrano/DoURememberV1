@@ -55,13 +55,10 @@ export class MemoryRecall implements OnInit {
     }
 
     listenForNewMemoryRecallsChanges(){
-          console.log(this.memoryRecallsList(), '1')
 
       this.serviceMemoryRecalls.getAllUserMemoryRecalls(this.userId).subscribe(memoryRecallsOfuser => {
               this.memoryRecallsList.set(memoryRecallsOfuser)
-          console.log(this.memoryRecallsList(), '3')
 
-              console.log('GUN')
               })
     }
   }

@@ -1,7 +1,8 @@
+import { PatientsService } from './../../services/patientsService';
+import { ServiceDoctors } from './../../services/service-doctors';
 import { Component, signal } from '@angular/core';
 import { User } from '../../models/User';
 import { PatientCard } from '../patient-card/patient-card';
-import { PatientsService } from '../../services/patientsService';
 
 @Component({
   selector: 'doctor-homepage',
@@ -13,16 +14,17 @@ export class DoctorHomepage {
 
   patients = signal<User[]>([]);
 
-  doctor!: string;
+  userId: number | null = 0
 
-  // constructor(private readonly patientsService: PatientsService){
-  //   this.patientsService.findAll().subscribe(allPatients => {
-  //     this.patients.set(allPatients)
-  //   })
+  constructor(private readonly ServiceDoctors: ServiceDoctors, private readonly PatientsService: PatientsService){
+    this.userId = this.PatientsService.getUserId();
+    this.getAllPatients()
+  }
 
-  //   // TODO doctor name from role in db extract it from the patients (its bad ik)
-
-  //   this.doctor = 'Rafel'
-  // }
+  getAllPatients(){
+    this.ServiceDoctors.getAllDoctorPatients(this.userId).subscribe(allDoctorPatients => {
+      this.patients.set(allDoctorPatients)
+    })
+  }
 
 }

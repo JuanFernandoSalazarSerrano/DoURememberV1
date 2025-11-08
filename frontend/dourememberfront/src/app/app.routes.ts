@@ -17,6 +17,7 @@ import { authGuard } from './guards/auth-guard';
 import { UploadMemoryRecall } from './components/upload-memory-recall/upload-memory-recall';
 import { DourememberServices } from './components/douremember-services/douremember-services';
 import { DourememberAbout } from './components/douremember-about/douremember-about';
+import { Signup } from './components/signup/signup';
 
 export const routes: Routes = [
     {
@@ -44,6 +45,10 @@ export const routes: Routes = [
     path: 'doctor/1/patients', // 1 is doctor id
     component: DoctorHomepage,
     canActivate: [authGuard]
+  },
+  {
+    path: 'signup', // 1 is doctor id
+    component: Signup,
   },
   {
     path: 'doctor/1/patient/1/statistics', // 1 is patient id

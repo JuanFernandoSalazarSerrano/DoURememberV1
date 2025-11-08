@@ -61,4 +61,12 @@ export class Auth {
   loginUser({username, password}: any): Observable<any>{
     return this.http.post<any>(this.url, {username, password})}
 
+  isAdmin(){
+    return this.user.isAdmin;
+  }
+
+  authenticated(){
+    return this.user.isAuth;
+  }
+
 }

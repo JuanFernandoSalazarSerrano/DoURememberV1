@@ -115,11 +115,12 @@
     </form>
 
     <!-- Sign Up Link -->
-    <div class="mt-8 text-center">
+    <div [routerLink]="['/signup']" class="mt-8 text-center">
       <!-- Updated text colors to gray and teal/orange -->
       <p class="nunito-sans-1 text-[#9CA3AA] text-base">
         Don't have an account?
-        <a href="#" class="font-bold text-[#4F7380] hover:text-[#F5821F] transition-colors ml-1">
+        <a
+         class="font-bold text-[#4F7380] hover:text-[#F5821F] transition-colors ml-1">
           Sign up here
         </a>
       </p>

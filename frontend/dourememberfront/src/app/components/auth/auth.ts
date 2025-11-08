@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/User';
 import { ToastrService } from 'ngx-toastr';
+import { RouterModule } from "@angular/router"
 
 @Component({
   selector: 'app-auth',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './auth.html'})
 
 export class Auth {
