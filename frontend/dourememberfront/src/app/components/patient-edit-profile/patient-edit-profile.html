@@ -1,50 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient Home - DoURemember</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    .quicksand-1 { font-family: 'Quicksand', sans-serif; }
-    .lexend-deca-1 { font-family: 'Lexend Deca', sans-serif; }
-    .nunito-sans-1 { font-family: 'Nunito Sans', sans-serif; }
-  </style>
-</head>
-
-<body class="bg-gradient-to-b from-gray-50 to-white">
+<body class="bg-white">
 
 <!-- Edit User Form Section -->
-<section class="relative py-10 px-6 bg-gradient-to-b from-gray-50 to-white">
+<section class="relative py-10 px-6 bg-gray-50">
   <div class="max-w-5xl mx-auto relative z-10">
-    <!-- Back Button -->
-    <div class="mb-6">
-      <div [routerLink]="['/patient/1']" class="group inline-flex items-center gap-3 bg-white rounded-2xl shadow-xl px-5 py-3 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-[#4F7380] cursor-pointer">
-        <div class="w-10 h-10 rounded-xl bg-[#4F7380] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </div>
-        <span class="quicksand-1 text-lg font-semibold text-gray-800">Back to Patient Home</span>
-      </div>
+
+    <!-- Implementing the simple back button with clean design -->
+    <div [routerLink]="[`/patient/${userId}`]">
+      <button class="group mb-4 flex items-center gap-2 text-[#4F7380] hover:text-[#F5821F] transition-colors duration-300 font-['Lexend_Deca'] font-semibold">
+        <!-- Left Arrow Icon -->
+        <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span class="text-lg">Go Back</span>
+      </button>
     </div>
 
-    <!-- Section Header -->
+    <!-- Simplified header without gradients -->
     <div class="text-center mb-8">
-      <div class="inline-block bg-gradient-to-r from-[#4F7380] to-[#e0730d] p-1 rounded-2xl shadow-lg mb-4">
-        <div class="bg-white px-8 py-4 rounded-2xl">
-          <h2 class="quicksand-1 text-4xl font-bold bg-gradient-to-r from-[#4F7380] to-[#e0730d] bg-clip-text text-transparent">
+      <div class="inline-block bg-[#4F7380] p-1 rounded-2xl shadow-lg mb-4">
+        <div class="bg-white px-8 py-4 rounded-xl">
+          <h2 class="font-['Lexend_Deca'] text-4xl font-bold text-[#4F7380]">
             Edit Patient Information
           </h2>
         </div>
       </div>
-      <p class="nunito-sans-1 text-gray-600 text-lg">Update your profile details and preferences</p>
+      <p class="nunito-sans-1 text-[#9CA3AA] text-lg">Update your profile details and preferences</p>
     </div>
 
-    <!-- Form Card -->
+    <!-- Removed gradient from top border, using solid color -->
     <div class="bg-white rounded-2xl shadow-2xl p-8 relative overflow-hidden">
-      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#4F7380] via-[#e0730d] to-[#4F7380]"></div>
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#F5821F]"></div>
 
       <!-- Form -->
       <form class="space-y-6">
@@ -94,18 +79,18 @@
           </div>
         </div>
 
-        <!-- Email -->
+        <!-- Updated email icon color to use palette color #F5821F -->
         <div>
           <label class="lexend-deca-1 block text-sm font-semibold text-gray-700 mb-2 uppercase tracking-wide">
             Email Address
           </label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg class="w-6 h-6 text-[#e0730d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-6 h-6 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <input type="email" value="john@example.com" class="nunito-sans-1 w-full pl-14 pr-4 py-3 text-lg bg-white border border-gray-200 rounded-xl focus:border-[#e0730d] focus:ring-2 focus:ring-[#e0730d]/30 transition-all duration-300 font-medium text-gray-800" />
+            <input type="email" value="john@example.com" class="nunito-sans-1 w-full pl-14 pr-4 py-3 text-lg bg-white border border-gray-200 rounded-xl focus:border-[#F5821F] focus:ring-2 focus:ring-[#F5821F]/30 transition-all duration-300 font-medium text-gray-800" />
           </div>
         </div>
 
@@ -155,7 +140,7 @@
           </div>
         </div>
 
-        <!-- Condition and Carer -->
+        <!-- Updated condition icon color to use palette color #F5821F -->
         <div class="grid md:grid-cols-2 gap-6">
           <div>
             <label class="lexend-deca-1 block text-sm font-semibold text-gray-700 mb-2 uppercase tracking-wide">
@@ -163,11 +148,11 @@
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-6 h-6 text-[#e0730d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <input type="text" value="Diabetes" class="nunito-sans-1 w-full pl-14 pr-4 py-3 text-lg bg-white border border-gray-200 rounded-xl focus:border-[#e0730d] focus:ring-2 focus:ring-[#e0730d]/30 transition-all duration-300 font-medium text-gray-800" />
+              <input type="text" value="Diabetes" class="nunito-sans-1 w-full pl-14 pr-4 py-3 text-lg bg-white border border-gray-200 rounded-xl focus:border-[#F5821F] focus:ring-2 focus:ring-[#F5821F]/30 transition-all duration-300 font-medium text-gray-800" />
             </div>
           </div>
 
@@ -186,10 +171,9 @@
           </div>
         </div>
 
-        <!-- Action Buttons -->
+        <!-- Replaced gradient buttons with solid colors -->
         <div class="flex flex-col sm:flex-row gap-4 pt-6">
-          <button type="submit" class="group flex-1 relative bg-gradient-to-r from-[#4F7380] to-[#e0730d] text-white py-3.5 px-8 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+          <button type="submit" class="group flex-1 relative bg-[#4F7380] hover:bg-[#F5821F] text-white py-3.5 px-8 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300">
             <div class="relative flex items-center justify-center gap-3">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -198,7 +182,7 @@
             </div>
           </button>
 
-          <button type="button" [routerLink]="['/patient/1']" class="group flex-1 relative bg-white border border-gray-300 text-gray-700 py-3.5 px-8 rounded-xl font-bold text-lg shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300">
+          <button type="button" [routerLink]="['/patient/1']" class="group flex-1 relative bg-white border-2 border-[#9CA3AA] text-gray-700 py-3.5 px-8 rounded-xl font-bold text-lg shadow-md hover:shadow-lg hover:border-[#4F7380] transition-all duration-300">
             <div class="relative flex items-center justify-center gap-3">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -225,4 +209,3 @@
 </section>
 
 </body>
-</html>
