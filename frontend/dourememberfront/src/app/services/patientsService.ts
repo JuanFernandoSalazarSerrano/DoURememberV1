@@ -15,6 +15,10 @@ export class PatientsService{
     return this.http.get<any>(`${this.url}/${id}`)
   }
 
+  getAllUserSessionsById(id: number | null): Observable<any>{
+    return this.http.get<any>(`${this.url}/findAllByUserId/${id}/sessions/0`)
+  }
+
   getUserId(): number | null {
   const token = sessionStorage.getItem("token"); // 0. retrieve token
   if (!token) return null;

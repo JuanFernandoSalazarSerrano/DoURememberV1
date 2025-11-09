@@ -11,4 +11,6 @@ export class PatientCard {
 
   @Input() patient!: User;
 
+  @Input() userId!: number | null;
+
 }

@@ -55,7 +55,7 @@ export const routes: Routes = [
     component: DoctorPovPatientStatistics
   },
       {
-    path: 'sessions/patient/1', // 1 is patient id
+    path: 'sessions/patient/:id', // 1 is patient id
     component: PatientSessions
   },
   {

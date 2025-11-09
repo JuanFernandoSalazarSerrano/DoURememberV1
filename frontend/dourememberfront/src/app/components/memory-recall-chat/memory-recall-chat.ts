@@ -56,22 +56,18 @@ export class MemoryRecallChat implements AfterViewChecked {
 
     const headers = new HttpHeaders().set('Authorization', `Basic YWRtaW46YWRtaW4=`);
     this.sseSub = this.sseClient.stream('http://localhost:8080/api/v1/groundtruth/stream', { keepAlive: true, reconnectionDelay: 1000, responseType: 'event' }, { headers }).subscribe((event) => {
-      console.log(1, 'Received event from SSE stream');
 
       if (event.type === 'error') {
         const errorEvent = event as ErrorEvent;
-        console.error(2, 'Error event from SSE stream', errorEvent.error, errorEvent.message);
       } else {
         const messageEvent = event as MessageEvent;
         try {
-          console.log(3, 'Trying to parse SSE data', messageEvent.data);
           const payload = typeof messageEvent.data === 'string'
             ? JSON.parse(messageEvent.data)
             : messageEvent.data;
 
           console.log(6, 'Parsed JSON from SSE data', payload.aiResponse);
           if (payload && payload.aiResponse !== undefined && payload.aiResponse !== null) {
-            console.log(7, 'Adding aiResponse to userMessageHistory', payload.aiResponse);
             this.userMessageHistory.set([...this.userMessageHistory(), payload.aiResponse]);
             this.nextMemoryRecall()
           } else {

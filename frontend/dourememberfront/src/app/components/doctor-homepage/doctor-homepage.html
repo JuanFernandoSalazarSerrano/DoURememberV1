@@ -56,7 +56,9 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
 
         @for (patient of patients(); track $index) {
-          <patient-card [patient]="patient"></patient-card>
+          <patient-card [patient]="patient"
+          [userId]="userId"
+          ></patient-card>
         }
 
       <!-- Create New Patient Button -->

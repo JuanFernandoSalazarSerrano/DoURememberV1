@@ -24,9 +24,14 @@
     <div class="text-center mb-12">
       <div class="inline-block bg-white border-2 border-[#9CA3AA] rounded-2xl shadow-xl mb-4">
         <div class="px-8 py-8">
-          <h1 class="quicksand-1 text-4xl md:text-5xl font-bold text-[#F5821F]">
-            Welcome back, {{user().name}} {{user().lastname}}!
-          </h1>
+          <div class="flex items-center justify-center">
+            <h1 class="font-['Lexend_Deca'] text-4xl md:text-5xl font-bold text-[#4F7380] mr-4">
+              Welcome back!
+            </h1>
+            <h1 class="quicksand-1 text-4xl md:text-5xl font-bold text-[#F5821F]">
+              {{user().name}} {{user().lastname}}
+            </h1>
+          </div>
         </div>
       </div>
       <p class="nunito-sans-1 text-[#9CA3AA] text-lg">Ready to continue your memory training journey?</p>
