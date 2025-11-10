@@ -25,11 +25,11 @@
       <div class="flex items-center gap-6">
         <!-- Patient avatar -->
         <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#e0730d] to-[#d66a0c] flex items-center justify-center shadow-lg flex-shrink-0">
-          <span class="text-white font-bold text-2xl quicksand-1">JA</span>
+          <img class="rounded-full" src="{{patient().profilepicture}}" alt="">
         </div>
 
         <div class="flex-1">
-          <h1 class="quicksand-1 text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+          <h1 class="font-['Lexend_Deca'] text-3xl md:text-4xl font-bold text-gray-800 mb-2">
             {{patient().name}} {{patient().lastname}}
           </h1>
           <div class="flex flex-wrap gap-4 text-sm nunito-sans-1">
@@ -61,7 +61,7 @@
       <!-- Section Header -->
       <div class="mb-8">
         <h2 class="quicksand-1 text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-          These are the memory recall sessions of <span class="text-[#e0730d]">James</span>
+          These are the memory recall sessions of <span class="text-[#e0730d]">{{patient().name}}</span>
         </h2>
         <p class="nunito-sans-1 text-gray-600">Track and review all memory recall sessions and progress</p>
       </div>
@@ -71,7 +71,67 @@
         {
           <individual-session
           [index]="$index + 1"
+          [userId]="userId"
           ></individual-session>
         }
+
+        @empty {
+      <!-- Enhanced empty state with better design matching DoURemember style -->
+      <div class="col-span-full flex items-center justify-center py-16">
+        <div class="text-center max-w-md mx-auto">
+          <!-- Icon with background -->
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#4F7380] to-[#6B9DAD] rounded-full mb-6 shadow-lg">
+<svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1,.cls-2{fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:1.91px;}.cls-2{stroke-linecap:square;}</style> </defs> <g id="computer"> <rect class="cls-1" x="1.5" y="1.5" width="21" height="16.23" rx="2.86"></rect> <polygon class="cls-1" points="15.82 22.5 8.18 22.5 9.14 17.73 14.86 17.73 15.82 22.5"></polygon> <line class="cls-1" x1="18.68" y1="22.5" x2="5.32" y2="22.5"></line> <path class="cls-2" d="M8.18,9.14h0A2.86,2.86,0,0,1,11,12v1a0,0,0,0,1,0,0H5.32a0,0,0,0,1,0,0V12A2.86,2.86,0,0,1,8.18,9.14Z"></path> <circle class="cls-2" cx="8.18" cy="7.23" r="1.91"></circle> <path class="cls-2" d="M19.64,13h0Z"></path> <line class="cls-1" x1="13.91" y1="7.23" x2="19.64" y2="7.23"></line> <line class="cls-1" x1="16.77" y1="4.36" x2="16.77" y2="10.09"></line> </g> </g></svg>
+          </div>
+
+          <!-- Heading -->
+          <h2 class="text-3xl font-bold text-[#4F7380] mb-4 font-['Lexend_Deca']">
+            No Sessions Yet
+          </h2>
+
+          <!-- Description -->
+          <p class="text-gray-600 text-lg quicksand-1 leading-relaxed">
+            Contact your patient and let's start creating some memories! Their journey begins with a single moment.
+          </p>
+        </div>
+      </div>
+    }
+
+@if (totalNumberOfPages() != 0) {
+<div [routerLink]="[`/doctor/${userId}/patient/${patient().id}/statistics/session/-1`]" class="mt-15 group relative bg-[#F5821F] rounded-xl border-4 border-[#e0730d] p-6 hover:border-[#4F7380] hover:shadow-2xl hover:shadow-[#F5821F]/40 transition-all duration-300 cursor-pointer hover:scale-[1.02] shadow-xl">
+  <!-- Removed gradient overlays, using solid orange background -->
+
+  <div class="relative flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-16 h-16 rounded-xl bg-[#4F7380] flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 border-2 border-white">
+        <span class="text-white font-bold text-2xl quicksand-1">⭐</span>
+      </div>
+
+      <div>
+        <!-- Made text white for contrast on orange background, increased font sizes -->
+        <h3 class="quicksand-1 text-2xl font-bold text-white mb-1 group-hover:scale-105 transition-transform duration-300">All Time Patient History</h3>
+        <div class="flex items-center gap-4 text-sm nunito-sans-1 text-white/90">
+          <span class="flex items-center gap-1.5 font-semibold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            January 15, 2025
+          </span>
+          <span class="flex items-center gap-1.5 font-semibold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            5 minutes
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+}
+
+
+
     </div>
   </div>

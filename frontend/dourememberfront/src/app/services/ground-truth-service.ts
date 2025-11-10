@@ -18,7 +18,5 @@ export class GroundTruthService {
       'Accept': 'application/json'
     });
     return this.http.post<string>(this.url, body, { headers });
-
   }
-
 }

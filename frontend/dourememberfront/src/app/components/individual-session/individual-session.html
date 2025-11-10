@@ -1,14 +1,14 @@
-<div [routerLink]="[`/doctor/1/patient/1/statistics`]" class="group relative bg-gradient-to-r from-white to-gray-50 rounded-xl border-2 border-green-100 p-6 hover:border-[#e0730d] hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
+<div [routerLink]="[`/doctor/${doctorId}/patient/${userId}/statistics/session/${index}`]" class="group relative bg-gradient-to-r from-white to-gray-50 rounded-xl border-2 border-green-100 p-6 hover:border-[#e0730d] hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
   <div class="absolute inset-0 bg-gradient-to-r from-[#e0730d]/0 to-[#e0730d]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
   <div class="relative flex items-center justify-between">
     <div class="flex items-center gap-4">
       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#4F7380] to-[#3d5a64] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
-        <span class="text-white font-bold text-lg quicksand-1">1</span>
+        <span class="text-white font-bold text-lg font-['Lexend_Deca']">{{index}}</span>
       </div>
 
       <div>
-        <h3 class="quicksand-1 text-xl font-bold text-gray-800 mb-1">Session {{index}}</h3>
+        <h3 class="font-['Lexend_Deca'] text-xl font-bold text-gray-800 mb-1">Session {{index}}</h3>
         <div class="flex items-center gap-4 text-sm nunito-sans-1 text-gray-600">
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,3 +36,5 @@
     </div>
   </div>
 </div>
+
+
