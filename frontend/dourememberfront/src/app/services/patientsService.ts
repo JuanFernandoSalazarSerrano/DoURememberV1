@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,11 @@ export class PatientsService{
 
   getAllUserInformation(id: number | null): Observable<any>{
     return this.http.get<any>(`${this.url}/${id}`)
+  }
+
+  createPatient(user: User): Observable<User>{
+    console.log('aasaas131837899')
+    return this.http.post<User>(this.url, user);
   }
 
   getUserId(): number | null {

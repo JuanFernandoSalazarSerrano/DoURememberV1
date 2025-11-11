@@ -18,6 +18,7 @@ import { UploadMemoryRecall } from './components/upload-memory-recall/upload-mem
 import { DourememberServices } from './components/douremember-services/douremember-services';
 import { DourememberAbout } from './components/douremember-about/douremember-about';
 import { Signup } from './components/signup/signup';
+import { CreateDoctor } from './components/create-doctor/create-doctor';
 
 export const routes: Routes = [
     {
@@ -38,7 +39,7 @@ export const routes: Routes = [
     component: MemoryRecallChat
   },
   {
-    path: 'statistics/session/1', // 1 is session
+    path: 'statistics/session', // 1 is session
     component: StatisticsSession
   },
     {
@@ -97,5 +98,9 @@ export const routes: Routes = [
   {
     path: 'douremember/about', // 1 is patient id
     component: DourememberAbout
+  },
+    {
+    path: 'createdoctor', // 1 is patient id
+    component: CreateDoctor
   },
 ];

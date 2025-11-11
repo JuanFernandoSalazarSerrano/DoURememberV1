@@ -1,3 +1,4 @@
+import { PatientsService } from './../../services/patientsService';
 import { Component, signal } from "@angular/core"
 import  { ActivatedRoute, Router } from "@angular/router"
 import  { MemoryRecallModel } from "../../models/MemoryRecallModel"
@@ -37,6 +38,7 @@ export class MemoryRecallChat implements AfterViewChecked {
     private readonly service: GroundTruthService,
     private readonly sseClient: SseClient,
     private readonly route: ActivatedRoute,
+    private readonly patientsService: PatientsService
   )
   {
 
@@ -132,6 +134,7 @@ export class MemoryRecallChat implements AfterViewChecked {
     this.service.sendUserAnswerToAiGroundTruthTest(
 
       `{
+      "userid":${JSON.stringify(this.patientsService.getUserId())},
       "groundTruth": ${JSON.stringify(this.memoryRecall.groundtruthdescriptioncomplete)},
       "groundTruthFacts": ${JSON.stringify(this.memoryRecall.groundtruthfacts)},
       "keyEntities": ${JSON.stringify(this.memoryRecall.keyentities)},

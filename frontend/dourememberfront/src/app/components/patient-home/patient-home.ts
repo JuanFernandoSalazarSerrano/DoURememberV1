@@ -22,8 +22,9 @@ export class PatientHome implements OnInit{
       username: '',
       password: '',
       role: '',
-      condition: '',
-      carer: ''
+      medical_condition: '',
+      carer: '',
+      doctor : {id: 2 }
     })
 
     constructor(private readonly PatientsService: PatientsService){

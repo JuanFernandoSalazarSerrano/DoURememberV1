@@ -6,176 +6,327 @@
   <title>Memory Assessment - DoURemember</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Lexend+Deca:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Added Uploadcare blocks library -->
+  <script src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.35.2/web/lr-file-uploader-regular.min.js" type="module"></script>
+
   <style>
     .quicksand-1 { font-family: 'Quicksand', sans-serif; }
     .lexend-deca-1 { font-family: 'Lexend Deca', sans-serif; }
     .nunito-sans-1 { font-family: 'Nunito Sans', sans-serif; }
+
+    /* Modern input/textarea styles */
+    .modern-input {
+      transition: all 0.2s ease;
+      border: 2px solid #e5e7eb;
+      background-color: #fafafa;
+    }
+
+    .modern-input:focus {
+      outline: none;
+      border-color: #F5821F;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(245, 130, 31, 0.1);
+    }
+
+    .modern-input:hover:not(:focus) {
+      border-color: #d1d5db;
+      background-color: #ffffff;
+    }
+
+    .modern-input::placeholder {
+      color: #9ca3af;
+    }
+
+    /* Modern file uploader wrapper styles - fusion design */
+    .upload-wrapper {
+      position: relative;
+      border: 2px dashed #e5e7eb;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+      padding: 2rem;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .upload-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(245, 130, 31, 0.03) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .upload-wrapper:hover {
+      border-color: #F5821F;
+      background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+      box-shadow: 0 4px 12px rgba(245, 130, 31, 0.08);
+    }
+
+    .upload-wrapper:hover::before {
+      opacity: 1;
+    }
+
+    .upload-icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .upload-icon-bg {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(245, 130, 31, 0.1) 0%, rgba(245, 130, 31, 0.05) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .upload-wrapper:hover .upload-icon-bg {
+      background: linear-gradient(135deg, rgba(245, 130, 31, 0.15) 0%, rgba(245, 130, 31, 0.08) 100%);
+      transform: scale(1.05);
+    }
+
+    .upload-icon-bg svg {
+      color: #F5821F;
+      transition: transform 0.3s ease;
+    }
+
+    .upload-wrapper:hover .upload-icon-bg svg {
+      transform: scale(1.1);
+    }
+
+    .upload-text {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .upload-text-primary {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #4F7380;
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-text-secondary {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.875rem;
+      color: #9CA3AA;
+      font-weight: 500;
+    }
+
+    .upload-text-hint {
+      font-family: 'Lexend Deca', sans-serif;
+      font-size: 0.75rem;
+      color: #9CA3AA;
+      margin-top: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    /* Hide Uploadcare default UI but keep it interactive */
+    lr-file-uploader-regular {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    /* Style the uploadcare component colors */
+    lr-file-uploader-regular {
+      --darkest: #4F7380;
+      --darkness: #4F7380;
+      --grayest: #9CA3AA;
+      --accent-color: #F5821F;
+      --accent-color-hover: #d66f15;
+    }
   </style>
 </head>
 
-<body class="bg-white min-h-screen py-10 px-4">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-12 px-4">
 
 <section class="w-full max-w-4xl mx-auto">
 
   <!-- Logo/Brand Area -->
-  <div class="text-center mb-8">
-    <div class="inline-flex items-center gap-3 mb-4">
-      <!-- Assessment Icon SVG -->
-      <div class="relative">
-        <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Outer circle accent -->
-          <circle cx="32" cy="32" r="30" fill="#F5821F" opacity="0.15"/>
-          <circle cx="32" cy="32" r="24" fill="#F5821F" opacity="0.25"/>
-
-          <!-- Clipboard/Document icon -->
-          <g transform="translate(18, 14)">
-            <!-- Clipboard board -->
-            <rect x="2" y="4" width="24" height="32" rx="2" fill="#4F7380" stroke="#4F7380" stroke-width="1.5"/>
-            <!-- Clipboard clip -->
-            <rect x="8" y="0" width="12" height="6" rx="1.5" fill="#F5821F" stroke="#F5821F" stroke-width="1"/>
-            <rect x="10" y="2" width="8" height="3" rx="0.5" fill="white"/>
-
-            <!-- Checkmarks/lines on clipboard -->
-            <line x1="7" y1="12" x2="21" y2="12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="7" y1="17" x2="21" y2="17" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="7" y1="22" x2="18" y2="22" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="7" y1="27" x2="21" y2="27" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-
-            <!-- Checkmark accent -->
-            <path d="M7 12 L9 14 L12 11" stroke="#F5821F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Title Text -->
-      <h1 class="quicksand-1 text-5xl font-bold">
-        <span class="text-[#4F7380]">Memory</span><span class="text-[#F5821F]"> Recall</span>
+  <div class="text-center mb-10">
+    <div class="inline-flex items-center gap-4 mb-3">
+      <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-20 h-20">
+      <h1 class="quicksand-1 text-5xl font-bold leading-tight">
+        <span class="lexend-deca-1 text-[#4F7380]">Memory</span><span class=" lexend-deca-1 text-[#F5821F]"> Recall</span>
       </h1>
     </div>
-    <p class="nunito-sans-1 text-[#9CA3AA] text-lg font-medium">Configure your memory recall parameters</p>
+    <p class="nunito-sans-1 text-[#9CA3AA] text-base font-medium tracking-wide">Upload a memory recall. Lets start this new story!</p>
   </div>
 
   <!-- Form Card -->
-  <div class="bg-white rounded-2xl shadow-2xl p-10 relative overflow-hidden">
-    <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#F5821F]"></div>
+  <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 relative overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-1 bg-[#F5821F]"></div>
 
     <!-- Form -->
-  <form class="space-y-8" (ngSubmit)="onSubmit()" #memoryForm="ngForm">
+    <form class="space-y-10" (ngSubmit)="onSubmit()" #memoryForm="ngForm">
       <!-- Image URL Section -->
-      <div class="pb-6 border-b-2 border-[#9CA3AA]/20">
+      <div class="pb-8 border-b border-gray-200">
         <h2 class="quicksand-1 text-2xl font-bold text-[#4F7380] mb-6 flex items-center gap-3">
-          <svg class="w-7 h-7 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          Image Reference
+          <div class="w-10 h-10 rounded-xl bg-[#F5821F]/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span>Image Reference</span>
         </h2>
+
         <div>
-          <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
-            Image URL
+          <label class="lexend-deca-1 block text-xs font-bold text-[#4F7380] mb-3 uppercase tracking-wider">
+            Upload your memory image
           </label>
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg class="w-6 h-6 text-[#4F7380]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-              </svg>
+
+          <!-- Integrated uploader with custom styling -->
+          <div class="upload-wrapper">
+            <div class="upload-icon-container">
+              <div class="upload-icon-bg">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+              </div>
+              <div class="upload-text ">
+                <p class="upload-text-primary">Click upload files button to browse</p>
+                <p class="upload-text-secondary">Support for multiple file sources</p>
+                <p class="upload-text-hint">Local, Camera, Google Drive, Facebook</p>
+              </div>
             </div>
-            <input
-              type="url"
-              placeholder="https://example.com/image.jpg"
-              [(ngModel)]="memoryRecall.memoryrecallurl"
-              name="imageUrl"
-              required
-              class="nunito-sans-1 w-full pl-12 pr-4 py-4 ..."
-            />
+
+            <!-- Uploadcare components positioned on top, invisible but interactive -->
+             <uc-config
+              ctx-name="my-uploader"
+              source-list="local, camera, facebook, gdrive"
+              pubkey="c4ec6c463bd7bbb7d031"
+              removeCopyright="true"
+            ></uc-config>
+
+            <uc-upload-ctx-provider
+  id="uploaderctx"
+  ctx-name="my-uploader"
+></uc-upload-ctx-provider>
+
+            <uc-file-uploader-regular
+              ctx-name="my-uploader"
+              class="uc-light uc-orange"
+            ></uc-file-uploader-regular>
+
           </div>
         </div>
+
       </div>
 
       <!-- Ground Truth Section -->
-      <div class="pb-6 border-b-2 border-[#9CA3AA]/20">
+      <div class="pb-8 border-b border-gray-200">
         <h2 class="quicksand-1 text-2xl font-bold text-[#4F7380] mb-6 flex items-center gap-3">
-          <svg class="w-7 h-7 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          Ground Truth Data
+          <div class="w-10 h-10 rounded-xl bg-[#F5821F]/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <span>Ground Truth Data</span>
         </h2>
 
         <div class="space-y-6">
-          <!-- Ground Truth -->
           <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
+            <label class="lexend-deca-1 block text-xs font-bold text-[#4F7380] mb-3 uppercase tracking-wider">
               Ground Truth
             </label>
-        <textarea
-          rows="4"
-          [(ngModel)]="memoryRecall.groundtruthdescriptionsmall"
-          name="groundTruth"
-          required
-          class="nunito-sans-1 w-full px-4 py-4 ..."
-        ></textarea>
+            <textarea
+              rows="4"
+              placeholder="Enter the ground truth description..."
+              [(ngModel)]="memoryRecall.groundtruthdescriptionsmall"
+              name="groundTruth"
+              required
+              class="nunito-sans-1 modern-input w-full px-4 py-3.5 text-[#4F7380] rounded-xl font-medium resize-none"
+            ></textarea>
           </div>
 
-          <!-- Ground Truth Facts -->
           <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
+            <label class="lexend-deca-1 block text-xs font-bold text-[#4F7380] mb-3 uppercase tracking-wider">
               Ground Truth Facts
             </label>
-        <textarea
-          rows="4"
-          [(ngModel)]="memoryRecall.groundtruthfacts"
-          name="groundTruthFacts"
-          class="nunito-sans-1 w-full px-4 py-4 ..."
-        ></textarea>
+            <textarea
+              rows="4"
+              placeholder="Enter ground truth facts..."
+              [(ngModel)]="memoryRecall.groundtruthfacts"
+              name="groundTruthFacts"
+              class="nunito-sans-1 modern-input w-full px-4 py-3.5 text-[#4F7380] rounded-xl font-medium resize-none"
+            ></textarea>
           </div>
 
-          <!-- Key Entities -->
           <div>
-            <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
+            <label class="lexend-deca-1 block text-xs font-bold text-[#4F7380] mb-3 uppercase tracking-wider">
               Key Entities
             </label>
             <textarea
               rows="3"
+              placeholder="Enter key entities..."
               [(ngModel)]="memoryRecall.keyentities"
               name="keyentities"
-              class="nunito-sans-1 w-full px-4 py-4 ..."
+              class="nunito-sans-1 modern-input w-full px-4 py-3.5 text-[#4F7380] rounded-xl font-medium resize-none"
             ></textarea>
           </div>
         </div>
       </div>
 
-
-
       <!-- User Answer Section -->
       <div>
         <h2 class="quicksand-1 text-2xl font-bold text-[#4F7380] mb-6 flex items-center gap-3">
-          <svg class="w-7 h-7 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-          User Response
+          <div class="w-10 h-10 rounded-xl bg-[#F5821F]/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-[#F5821F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <span>User Response</span>
         </h2>
 
         <div>
-          <label class="lexend-deca-1 block text-sm font-semibold text-[#4F7380] mb-2 uppercase tracking-wide">
+          <label class="lexend-deca-1 block text-xs font-bold text-[#4F7380] mb-3 uppercase tracking-wider">
             User Answer
           </label>
-            <textarea
-              rows="6"
-              [(ngModel)]="memoryRecall.groundtruthdescriptioncomplete"
-              name="userAnswer"
-              required
-              class="nunito-sans-1 w-full px-4 py-4 ..."
-            ></textarea>
+          <textarea
+            rows="6"
+            placeholder="Enter user's complete answer..."
+            [(ngModel)]="memoryRecall.groundtruthdescriptioncomplete"
+            name="userAnswer"
+            required
+            class="nunito-sans-1 modern-input w-full px-4 py-3.5 text-[#4F7380] rounded-xl font-medium resize-none"
+          ></textarea>
         </div>
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="group w-full relative bg-[#F5821F] text-white py-5 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-2xl hover:bg-[#d66f15] transition-all duration-300 overflow-hidden mt-8">
+      <button type="submit" class="group w-full relative bg-[#F5821F] text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:bg-[#d66f15] transition-all duration-200 overflow-hidden mt-10 active:scale-[0.98]">
         <div class="relative flex items-center justify-center gap-3">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
           </svg>
-          <span class="quicksand-1">Submit Assessment</span>
-          <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="quicksand-1 tracking-wide">Submit Assessment</span>
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </div>
@@ -186,12 +337,12 @@
   </div>
 
   <!-- Info Notice -->
-  <div class="mt-6 text-center">
-    <div class="inline-flex items-center gap-2 bg-[#4F7380]/10 px-6 py-3 rounded-full border border-[#4F7380]/30">
-      <svg class="w-5 h-5 text-[#4F7380]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="mt-8 text-center">
+    <div class="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-2xl border border-[#4F7380]/20 shadow-sm">
+      <svg class="w-5 h-5 text-[#4F7380] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <p class="nunito-sans-1 text-[#4F7380] font-medium text-sm">All scoring weights should sum to 1.0 for accurate evaluation</p>
+      <p class="nunito-sans-1 text-[#4F7380] font-medium text-sm">All your images are safely secured</p>
     </div>
   </div>
 

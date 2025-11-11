@@ -14,20 +14,32 @@ export class DoctorHomepage {
 
   patients = signal<User[]>([]);
 
-  doctorInfo!: User;
+  doctorInfo =  signal<User>({
+    id: null,
+    profilepicture: '',
+    name: '',
+    lastname: '',
+    email: '',
+    username: '',
+    password: '',
+    role: '',
+    medical_condition: '',
+    carer: '',
+    doctor : {id: 2 }
+  })
 
   userId: number | null = 0;
 
-  doctorName: string = 'Mr. Memory';
+  doctorName: string = 'Angular refreh error, please refresh';
 
   doctorImage: string | null = null;
 
   constructor(private readonly ServiceDoctors: ServiceDoctors, private readonly PatientsService: PatientsService){
     this.userId = this.PatientsService.getUserId();
     this.PatientsService.getAllUserInformation(this.userId).subscribe(userInfo => {
-      this.doctorInfo = userInfo
-      this.doctorName = this.doctorInfo.name
-      this.doctorImage = this.doctorInfo.profilepicture
+      this.doctorInfo.set(userInfo)
+      this.doctorName = this.doctorInfo().name
+      this.doctorImage = this.doctorInfo().profilepicture
     })
     this.getAllPatients()
   }

@@ -20,6 +20,10 @@ export class DoctorPovPatientStatistics implements OnInit, OnDestroy {
 
   index!: number;
 
+  meanOfAllSessions!: number;
+
+  numberOfElements!: number;
+
   // aiResponses is now a signal
   public aiResponses = signal<GroundTruthResponse[]>([]);
 
@@ -42,14 +46,36 @@ export class DoctorPovPatientStatistics implements OnInit, OnDestroy {
 
     const userIdToFetch = typeof this.patientId === 'number' ? this.patientId : 1;
 
-    // Choose API method based on presence of patientId (keeps your original branching)
-    if (this.index === undefined || this.index === null || this.index === -1) {
-      this.sub = this.PatientsService.getAllUserSessionsById(userIdToFetch)
-        .subscribe(list => this.handleResponseArray(list));
-    } else {
+if (this.index === undefined || this.index === null || this.index === -1) {
+  this.sub = this.PatientsService.getAllUserSessionsById(userIdToFetch)
+    .subscribe((list: any) => {
+
+      const items: GroundTruthResponse[] = Array.isArray(list?.content) ? list.content : (Array.isArray(list) ? list : []);
+
+      let sum = 0;
+      let count = 0;
+
+      for (let i = 0; i < items.length; i++) {
+        const score = Number(items[i].rememberScore);
+        if (!isNaN(score)) {
+          sum += score;
+          count++;
+        }
+      }
+
+      this.meanOfAllSessions = count > 0 ? (sum / count) : 0;
+
+      this.handleResponseArray(list);
+    });
+}
+
+
+    else {
       this.sub = this.PatientsService.findAllUserSessionsByUserIdPage(userIdToFetch, (this.index - 1))
         .subscribe(list =>
-          this.handleResponseArray(list.content)
+          {          this.numberOfElements = list.numberOfElements
+
+            this.handleResponseArray(list.content)}
         );
     }
   }

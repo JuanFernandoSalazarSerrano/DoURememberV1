@@ -11,11 +11,18 @@
       </button>
     </div>
 
-    <!-- Graph Container -->
-    <div class="bg-gray-50 rounded-xl p-6 mb-6">
-      <!--  Reduced SVG height from 500px to 350px and adjusted viewBox height from 400 to 280 -->
-      <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="'line'"></canvas>
-    </div>
+          <!-- Chart Container -->
+      <div class="bg-gray-50 rounded-xl p-6 mb-8 border-2 border-gray-200">
+        <h3 class="quicksand-1 text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-[#4F7380] flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          Remember Score Trend
+        </h3>
+        <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="'line'"></canvas>
+      </div>
 
     <!-- Legend -->
     <div class="flex justify-center gap-12 mb-6">
@@ -40,7 +47,7 @@
           Average Accuracy
         </p>
         <p class="text-5xl font-bold" style="color: #F5821F; font-family: 'Lexend Deca', sans-serif;">
-          82%
+          {{ (aiResponses()[0].accuracy * 100).toFixed(0) }}%
         </p>
       </div>
       <div class="bg-blue-50 rounded-xl p-6 text-center border-2" style="border-color: #4F7380;">
@@ -48,7 +55,7 @@
           Avg Response Time
         </p>
         <p class="text-5xl font-bold" style="color: #4F7380; font-family: 'Lexend Deca', sans-serif;">
-          3.2s
+          6.2s
         </p>
       </div>
       <div class="bg-green-50 rounded-xl p-6 text-center border-2 border-green-300">
@@ -56,7 +63,7 @@
           Tests Completed
         </p>
         <p class="text-5xl font-bold" style="color: #4F7380; font-family: 'Lexend Deca', sans-serif;">
-          10
+          4
         </p>
       </div>
     </div>

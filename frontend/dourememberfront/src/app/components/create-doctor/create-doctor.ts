@@ -1,5 +1,5 @@
-import { PatientsService } from './../../services/patientsService';
 import { Component } from '@angular/core';
+import { PatientsService } from './../../services/patientsService';
 import { Router, RouterModule } from '@angular/router';
 import { User } from "../../models/User"
 import { FormsModule } from '@angular/forms';
@@ -7,11 +7,12 @@ import { CommonModule } from "@angular/common"
 
 
 @Component({
-  selector: 'signup',
+  selector: 'create-doctor',
   imports: [RouterModule, FormsModule, CommonModule],
-  templateUrl: './signup.html'
+  templateUrl: './create-doctor.html',
 })
-export class Signup {
+
+export class CreateDoctor {
 
   user: User;
 

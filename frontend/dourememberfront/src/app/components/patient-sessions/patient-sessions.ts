@@ -24,8 +24,9 @@ export class PatientSessions implements OnInit{
     username: '',
     password: '',
     role: '',
-    condition: '',
-    carer: ''
+    medical_condition: '',
+    carer: '',
+    doctor : {id: 2 }
   })
 
   constructor(private readonly patientService: PatientsService, private readonly route: ActivatedRoute){}
