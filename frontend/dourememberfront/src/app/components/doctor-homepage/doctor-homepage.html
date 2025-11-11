@@ -29,12 +29,12 @@
           }
           @else {
           <div class="w-16 h-16 rounded-full bg-[#4F7380] flex items-center justify-center shadow-lg">
-            <img src={{doctorImage}} alt="Doctor {{doctorName}}" class="w-16 h-16 rounded-full object-cover shadow-lg">
+            <img src={{doctorImage}} class="w-16 h-16 rounded-full object-cover shadow-lg">
           </div>
           }
           <div>
             <h1 class="quicksand-1 text-3xl md:text-4xl font-bold text-gray-800">
-              Hello, <span class="text-[#e0730d]">Doctor {{doctorName}}!</span>
+              Hello, <span class="text-[#e0730d]">Doctor {{doctorName()}}!</span>
             </h1>
 
             <p class="nunito-sans-1 text-gray-600 mt-1">Welcome back to your patients dashboard</p>

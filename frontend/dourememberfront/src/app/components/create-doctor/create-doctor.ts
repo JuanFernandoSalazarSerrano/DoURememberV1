@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { PatientsService } from './../../services/patientsService';
 import { Router, RouterModule } from '@angular/router';
 import { User } from "../../models/User"
+import { Doctor } from "../../models/Doctor"
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common"
+import { delay } from 'rxjs/operators';
 
 
 @Component({
@@ -21,9 +23,37 @@ export class CreateDoctor {
   }
 
   onSubmit(): void {
+
     const { id, ...userWithoutId } = this.user;
-    this.patientsService.createPatient(userWithoutId as User).subscribe(_ => {this.router.navigate([`/login`]);}
-    )
+
+    //1 create user
+    console.log(userWithoutId, '792437')
+    console.log(userWithoutId.password, '143242')
+
+    this.patientsService.createPatient(userWithoutId as User)
+      .pipe(delay(2000))
+      .subscribe(() => {
+        console.log(userWithoutId.password, '15555')
+        // 2 make user a doctor
+        this.patientsService.createDoctor()
+          .subscribe(() => {
+            // 3 create doctor with data from user and add to doctors list
+            const doctor = new Doctor();
+
+            // fill the doctor instance with data from the created user
+            doctor.doctorname = 'Dr. ' + this.user.name + ' ' + this.user.lastname;
+            doctor.doctorlocation = this.user.medical_condition;
+            doctor.doctorspecialties = this.user.carer;
+            doctor.doctoremail = this.user.email;
+
+            // remove id after assigning the fields so the object we send contains the updated values
+            const { id, ...doctorWithoutId } = doctor;
+
+            this.patientsService.createNewDoctor(doctorWithoutId as Doctor)
+              .subscribe(_ => { this.router.navigate([`/login`]); });
+          })
+      })
+
   }
 
 }

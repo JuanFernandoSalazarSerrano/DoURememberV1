@@ -14,5 +14,4 @@ export class ServiceDoctors {
     getAllDoctorPatients(id: number | null): Observable<any>{
     return this.http.get<any>(`${this.url}/getAllDoctorPatients/${id}`)
   }
-
 }

@@ -30,7 +30,7 @@ export class DoctorHomepage {
 
   userId: number | null = 0;
 
-  doctorName: string = 'Angular refreh error, please refresh';
+  doctorName = signal<string>('Angular refreh error, please refresh')
 
   doctorImage: string | null = null;
 
@@ -38,7 +38,7 @@ export class DoctorHomepage {
     this.userId = this.PatientsService.getUserId();
     this.PatientsService.getAllUserInformation(this.userId).subscribe(userInfo => {
       this.doctorInfo.set(userInfo)
-      this.doctorName = this.doctorInfo().name
+      this.doctorName.set( this.doctorInfo().name)
       this.doctorImage = this.doctorInfo().profilepicture
     })
     this.getAllPatients()
