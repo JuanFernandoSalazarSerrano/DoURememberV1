@@ -50,4 +50,20 @@ export class DoctorHomepage {
     })
   }
 
+  /**
+   * Open the user's default mail client with a prefilled invitation.
+   * Uses mailto: so the user can choose the recipient and send the invite.
+   */
+  invitePatientEmail(){
+    const subject = `Invitation to join DoURemember`;
+    const signupLink = 'https://douremember.example.com';
+    const doctor = this.doctorName ? this.doctorName() : '';
+    const doctorEmail = this.doctorInfo ? this.doctorInfo().email : '';
+    const body = `Hello. ${doctor} has invited you to join DoURemember. Sign up here: http://douremember.com/signup, Remember! the doctor ID is = ${this.userId}  you have questions, reply to ${doctorEmail} Best regards,${doctor}`;
+
+    const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${body}`;
+    // Use window.location.href to open the default mail client
+    window.location.href = mailto;
+  }
+
 }

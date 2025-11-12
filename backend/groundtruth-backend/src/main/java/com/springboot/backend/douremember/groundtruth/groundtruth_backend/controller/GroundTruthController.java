@@ -52,6 +52,8 @@ public class GroundTruthController {
 
     @PostMapping("/saveAiResponse")
     public ResponseEntity<GroundTruthResponse> saveAiResponse(@RequestBody GroundTruthResponse llmResponse) {
+        System.out.println("IAAAAAAAAA");
+        System.out.println(llmResponse + "IAAAAAAAAA");
         service.saveGroundTruthResponse(llmResponse);
 
         // broadcast to all connected clients

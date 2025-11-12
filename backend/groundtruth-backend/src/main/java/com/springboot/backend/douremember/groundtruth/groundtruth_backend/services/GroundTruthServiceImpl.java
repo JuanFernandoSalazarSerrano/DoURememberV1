@@ -48,6 +48,7 @@ public class GroundTruthServiceImpl implements GroundTruthService {
     @Override
     public GroundTruthResponse saveGroundTruthResponse(GroundTruthResponse groundTruthResponse) {
         System.out.println("HOLA AMIGOS "+ groundTruthResponse);
+        System.out.println("HOLA AMIGO TEST");
         return repository.save(groundTruthResponse);
     }
 }

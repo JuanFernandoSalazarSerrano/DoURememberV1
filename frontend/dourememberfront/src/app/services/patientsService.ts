@@ -60,4 +60,8 @@ export class PatientsService{
     return this.http.post<Doctor>(`${this.url}/createNewDoctor`, doctor);
   }
 
+  getAllDoctors(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.url}/doctors`);
+  }
+
 }

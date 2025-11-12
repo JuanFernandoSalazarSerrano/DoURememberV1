@@ -1,16 +1,16 @@
 export class User {
   id: number | null = null;
-  profilepicture: string = 'https://noimageurl.com';
-  name: string = 'noname';
-  lastname: string = 'nolastname';
-  email: string = 'noemail@gmail.com';
-  username: string = 'nousername';
-  password: string = 'nopassword';
-  role: string = 'norole';
-  medical_condition: string = 'nocondition';
-  carer: string = 'nocarer';
+  profilepicture: string = '';
+  name: string = '';
+  lastname: string = '';
+  email: string = '';
+  username: string = '';
+  password: string = '';
+  role: string = '';
+  medical_condition: string = '';
+  carer: string = '';
   doctor = {
-    id: 2  // nested object (this is what your backend expects)
+    id: 0  // nested object (this is what your backend expects)
   };
 }
 

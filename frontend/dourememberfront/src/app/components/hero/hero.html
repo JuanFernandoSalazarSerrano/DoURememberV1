@@ -10,11 +10,6 @@
     <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full -rotate-[15deg] transform" style="filter: brightness(0) saturate(100%) invert(47%) sepia(45%) saturate(1247%) hue-rotate(360deg) brightness(95%) contrast(88%);" />
   </div>
 
-  <!-- Small brain - bottom right, subtle accent -->
-  <div class="absolute bottom-32 right-1/4 w-32 h-32 opacity-[0.12] pointer-events-none animate-pulse z-20">
-    <img src="https://www.svgrepo.com/show/293916/brain.svg" alt="" class="w-full h-full rotate-[45deg]"/>
-  </div>
-
   <div class="max-w-5xl mx-auto relative mt-16 z-10">
     <!-- Hero Heading -->
     <div class="text-center mb-12">
@@ -67,13 +62,58 @@
           <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-[#4F7380]/0 via-[#4F7380]/0 to-[#e0730d]/0 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none -z-10 blur-xl"></div>
         </div>
 
-        <!-- Search Button -->
-        <button class="group relative flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#e0730d] to-[#d66a0c] text-white font-semibold quicksand-1 shadow-lg shadow-[#e0730d]/30 hover:shadow-xl hover:shadow-[#e0730d]/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 overflow-hidden">
+      <!-- Search Button -->
+        <button (click)="onSearch()" class="group relative flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#e0730d] to-[#d66a0c] text-white font-semibold quicksand-1 shadow-lg shadow-[#e0730d]/30 hover:shadow-xl hover:shadow-[#e0730d]/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 overflow-hidden">
           <span class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></span>
           <span class="relative">Search</span>
         </button>
       </div>
     </div>
-  </div>
-</section>
+
+    <!-- Doctors List Section -->
+    <div *ngIf="showDoctors" class="mt-12 relative z-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Available Doctors</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <a *ngFor="let doctor of doctors" [href]="getMailtoLink(doctor.doctoremail)" class="doctor-card flex items-center gap-4 p-4 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:border-[#F5821F] transition-all cursor-pointer no-underline">
+          <!-- Doctor Avatar -->
+          <div class="flex-shrink-0">
+            <div class="w-16 h-16 rounded-full bg-[#4F7380] flex items-center justify-center text-white text-xl quicksand-1">
+              <span>{{ getInitials(doctor.doctorname) }}</span>
+            </div>
+          </div>
+
+          <!-- Doctor Information -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-gray-900 nunito-sans-1">{{ doctor.doctorname }}</h3>
+                <p class="text-sm text-[#4F7380] lexend-deca-1 mt-1">{{ doctor.doctorspecialties }}</p>
+              </div>
+            </div>
+
+            <!-- Additional Details -->
+            <div class="flex items-center gap-4 mt-2 text-sm text-[#9CA3AA] lexend-deca-1">
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>{{ doctor.doctorlocation }}</span>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <span class="px-2 py-1 rounded-full bg-[#4F7380]/10 text-[#4F7380] text-xs font-semibold">
+                  {{ doctor.isremote === 1 ? 'Remote' : 'On-site' }}
+                </span>
+              </div>
+            </div>
+          </div>
+          </a>
+      </div>
+
+      <!-- No Results Message -->
+      <div *ngIf="doctors.length === 0" class="text-center py-12">
+        <p class="text-gray-600 text-lg">No doctors available at this time.</p>
+      </div>
+    </div>
 
