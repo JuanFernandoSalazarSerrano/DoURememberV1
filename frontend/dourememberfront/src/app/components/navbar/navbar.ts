@@ -22,7 +22,7 @@ export class Navbar {
   }
 
   isAuth(){
-    console.log(this.auth.authenticated())
+    console.log(this.auth.authenticated(), 'DKSDKSADJLK')
     return this.auth.authenticated()
   }
 
