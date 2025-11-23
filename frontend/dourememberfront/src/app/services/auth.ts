@@ -49,7 +49,7 @@ export class Auth {
 
   set user(user: any) {
     this._user = user;
-    sessionStorage.setItem('login', JSON.stringify(user)
+    sessionStorage.setItem('login', JSON.stringify(user))
   }
 
   getpayload(token: string){
@@ -69,4 +69,17 @@ export class Auth {
   authenticated(){
     return this.user.isAuth;
   }
+
+  logout(){
+    this._token = undefined
+
+      this._user = {
+      isAuth: false,
+      isAdmin: false,
+      user: undefined
+    };
+    sessionStorage.removeItem('login')
+    sessionStorage.removeItem('token')
+  }
+
 }
