@@ -19,6 +19,7 @@ import { DourememberServices } from './components/douremember-services/dourememb
 import { DourememberAbout } from './components/douremember-about/douremember-about';
 import { Signup } from './components/signup/signup';
 import { CreateDoctor } from './components/create-doctor/create-doctor';
+import { Forbidden403 } from './components/forbidden403/forbidden403';
 
 export const routes: Routes = [
     {
@@ -80,7 +81,7 @@ export const routes: Routes = [
     component: PatientTests
   },
     {
-    path: 'patient/1/edit', // 1 is patient id
+    path: 'patient/:id/edit', // 1 is patient id
     component: PatientEditProfile
   },
   {
@@ -102,5 +103,9 @@ export const routes: Routes = [
     {
     path: 'createdoctor', // 1 is patient id
     component: CreateDoctor
+  },
+  {
+    path: 'forbidden', // 1 is patient id
+    component: Forbidden403
   },
 ];

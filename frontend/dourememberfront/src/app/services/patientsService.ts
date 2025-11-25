@@ -20,12 +20,14 @@ export class PatientsService{
   }
 
   createPatient(user: User): Observable<User>{
-    console.log('1')
     return this.http.post<User>(this.url, user);
   }
 
+  updatePatient(user: User): Observable<User> {
+    return this.http.put<User>(`${this.url}/${user.id}`, user);
+  }
+
     createDoctor(): Observable<any>{
-    console.log('2')
     return this.http.post(`${this.url}/createDoctor`, this.empty);
   }
 
@@ -56,7 +58,6 @@ export class PatientsService{
   }
 
   createNewDoctor(doctor: Doctor): Observable<Doctor> {
-    console.log('3')
     return this.http.post<Doctor>(`${this.url}/createNewDoctor`, doctor);
   }
 

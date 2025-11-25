@@ -27,13 +27,11 @@ export class CreateDoctor {
     const { id, ...userWithoutId } = this.user;
 
     //1 create user
-    console.log(userWithoutId, '792437')
-    console.log(userWithoutId.password, '143242')
+
 
     this.patientsService.createPatient(userWithoutId as User)
       .pipe(delay(2000))
       .subscribe(() => {
-        console.log(userWithoutId.password, '15555')
         // 2 make user a doctor
         this.patientsService.createDoctor()
           .subscribe(() => {

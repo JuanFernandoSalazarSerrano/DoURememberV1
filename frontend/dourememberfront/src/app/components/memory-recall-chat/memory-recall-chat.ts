@@ -68,7 +68,6 @@ export class MemoryRecallChat implements AfterViewChecked {
             ? JSON.parse(messageEvent.data)
             : messageEvent.data;
 
-          console.log(6, 'Parsed JSON from SSE data', payload.aiResponse);
           if (payload && payload.aiResponse !== undefined && payload.aiResponse !== null) {
             this.userMessageHistory.set([...this.userMessageHistory(), payload.aiResponse]);
             this.nextMemoryRecall()

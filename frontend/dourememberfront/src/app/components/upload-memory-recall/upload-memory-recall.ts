@@ -146,7 +146,6 @@ export class UploadMemoryRecall {
         error: (err) => console.error(err)
       });
 
-    console.log(this.memoryRecall, '4389');
 
     await new Promise(resolve => setTimeout(resolve, 100));
     this.router.navigate([`/tests/memoryrecall/${this.userId}`]);

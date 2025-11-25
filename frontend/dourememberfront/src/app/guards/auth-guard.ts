@@ -19,6 +19,11 @@ export const authGuard: CanActivateFn = (route, state) => {
       return false
     }
 
+    if(!AuthService.isAdmin()){
+      router.navigate(['/forbidden'])
+      return false
+    }
+
     return true;
   }
 

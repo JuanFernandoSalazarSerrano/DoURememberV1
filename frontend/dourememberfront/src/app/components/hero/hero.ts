@@ -6,7 +6,7 @@ import { Doctor } from '../../models/Doctor';
 
 @Component({
   selector: 'hero',
-  imports: [DoctorDropCard, CommonModule],
+  imports: [CommonModule],
   templateUrl: './hero.html',
 })
 export class Hero implements OnInit {

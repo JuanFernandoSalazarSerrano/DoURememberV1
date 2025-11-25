@@ -38,7 +38,6 @@ export class DoctorPovPatientStatistics implements OnInit, OnDestroy {
       this.route.paramMap.subscribe(params => {
         this.index = +(params.get('index') || -1)
         this.patientId = +(params.get('patientid') || -1)
-        console.log(this.index, 'ABC')
       })
       }
 
